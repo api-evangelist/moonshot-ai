@@ -3,7 +3,9 @@ url: https://raw.githubusercontent.com/api-evangelist/moonshot-ai/refs/heads/mai
 name: Moonshot AI
 x-type: company
 description: >-
-  Moonshot AI is a Chinese foundation model company best known for Kimi, an LLM with industry-leading long-context capabilities. The Moonshot platform exposes chat completion, embeddings, and tool-calling APIs.
+  Moonshot AI is a Chinese foundation model company best known for Kimi, an LLM with industry-leading
+  long-context capabilities. The Moonshot platform exposes OpenAI-compatible chat completion, files,
+  batch, models, balance, and token-estimation APIs.
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
   - AI
@@ -14,10 +16,43 @@ tags:
 created: '2026-05-08'
 modified: '2026-05-08'
 specificationVersion: '0.19'
-apis: []
+apis:
+  - aid: moonshot-ai:platform
+    name: Moonshot AI Platform API
+    description: >-
+      OpenAI-compatible inference API for Kimi K2.6, K2.5, K2, and Moonshot V1 models. Supports
+      chat completions (incl. partial mode and tool use), models listing, file upload and content
+      extraction, batch jobs, account balance, and token estimation.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://platform.kimi.ai/docs
+    baseURL: https://api.moonshot.ai
+    tags:
+      - AI
+      - LLM
+      - Chat Completions
+      - Embeddings
+      - Files
+      - Batch
+      - Long Context
+      - Kimi
+    properties:
+      - type: Documentation
+        url: https://platform.kimi.ai/docs
+      - type: OpenAPI
+        url: openapi/moonshot-ai-openapi.json
+      - type: SignUp
+        url: https://platform.kimi.ai/console/api-keys
+      - type: Pricing
+        url: https://platform.kimi.ai/docs/pricing/chat
+      - type: RateLimits
+        url: https://platform.kimi.ai/docs/pricing/limits
+      - type: Playground
+        url: https://platform.kimi.ai/playground
 common:
   - type: Website
     url: https://www.moonshot.ai/
+  - type: Documentation
+    url: https://platform.kimi.ai/docs
   - type: Plans
     url: plans/moonshot-ai-plans-pricing.yml
   - type: RateLimits

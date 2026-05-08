@@ -5,7 +5,7 @@ provider: Moonshot AI
 providerId: moonshot-ai
 created: '2026-05-08'
 modified: '2026-05-08'
-reconciled: false
+reconciled: true
 tags:
 - AI
 - LLM
@@ -15,10 +15,17 @@ tags:
 - FinOps
 - Cost Management
 - FOCUS
-description: FOCUS-aligned FinOps placeholder for Moonshot AI. Pipeline will replace with real billing details.
-notes: Initial scaffold — billing model has not yet been reconciled.
+description: >-
+  FOCUS-aligned FinOps profile for Moonshot AI / Kimi. Billing model is prepaid recharge with
+  pay-as-you-go consumption metered against per-million-token rates per model and per direction
+  (input cache-hit, input cache-miss, output). Batch jobs are billed at 50% of online rates.
+notes: >-
+  Prepaid balance maps to FOCUS Purchase / Adjustment categories; consumption maps to Usage.
+  Document extraction and storage are free at reconciliation; expect them to monetize later.
 sources:
-- https://www.moonshot.ai/
+- https://platform.kimi.ai/docs/pricing/chat
+- https://platform.kimi.ai/docs/pricing/batch
+- https://platform.kimi.ai/docs/pricing/limits
 - https://focus.finops.org/focus-specification/v1-3/
 alignedWith:
   framework: FinOps Foundation Framework
@@ -27,40 +34,67 @@ alignedWith:
   dataSpecVersion: '1.3'
   dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
 publisherName: Moonshot AI
-serviceCategory: AI
+serviceCategory: AI and Machine Learning
 billingModel:
-  pricingCategory: To Be Reconciled
-  billingFrequency: Monthly
-  billingCurrency: USD
+  pricingCategory: Usage Based
+  billingFrequency: On-Demand (Recharge)
+  billingCurrency: CNY/USD
   chargeCategories:
   - Usage
   - Purchase
   - Adjustment
 focusColumns:
-  ServiceName: Moonshot AI
-  ServiceCategory: AI
+  ServiceName: Moonshot AI Platform
+  ServiceCategory: AI and Machine Learning
   ProviderName: Moonshot AI
   PublisherName: Moonshot AI
   InvoiceIssuerName: Moonshot AI
-  BillingCurrency: USD
+  BillingCurrency: CNY
   ChargeCategory: Usage
 meters:
-- name: api_usage
-  description: Catch-all meter pending reconciliation.
-  unit: varies
+- name: input_tokens_cache_miss
+  description: Input tokens billed when cache miss occurs.
+  unit: tokens
+  aggregation: sum
+  dimensions:
+  - model
+  - account
+- name: input_tokens_cache_hit
+  description: Discounted input tokens served from prompt cache.
+  unit: tokens
+  aggregation: sum
+  dimensions:
+  - model
+  - account
+- name: output_tokens
+  description: Generated output tokens.
+  unit: tokens
+  aggregation: sum
+  dimensions:
+  - model
+  - account
+- name: batch_tokens
+  description: Batch endpoint tokens (50% discount versus online).
+  unit: tokens
+  aggregation: sum
+  dimensions:
+  - model
+  - account
+- name: web_search_calls
+  description: Web search tool invocations.
+  unit: calls
   aggregation: sum
   dimensions:
   - account
-  - resource
 principles:
 - name: Visibility
-  description: Pull provider invoices or usage exports until a self-serve usage feed is documented.
+  description: Use the Balance API and console usage exports to track recharge balance and consumption.
 - name: Allocation
-  description: Tag invoice line items to consuming business units in your FinOps store.
+  description: Tag API keys per workload/team to attribute model spend.
 - name: Optimization
-  description: Levers depend on the provider's billing model; review at renewal once reconciled.
+  description: Prefer prompt caching, batch endpoints (50% off), shorter contexts, and right-sized models.
 - name: Accountability
-  description: Assign a contract owner to review billing against negotiated terms.
+  description: Monitor tier ceiling utilization and renegotiate at $3K/$10K cumulative-recharge tier breaks.
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

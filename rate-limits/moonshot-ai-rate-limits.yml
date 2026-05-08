@@ -5,7 +5,7 @@ provider: Moonshot AI
 providerId: moonshot-ai
 created: '2026-05-08'
 modified: '2026-05-08'
-reconciled: false
+reconciled: true
 tags:
 - AI
 - LLM
@@ -15,21 +15,46 @@ tags:
 - Rate Limiting
 - Quotas
 - Throttling
-description: Placeholder rate-limit artifact for Moonshot AI. Replace with real limits once researched.
-notes: Initial scaffold — limits have not yet been reconciled.
+description: >-
+  Tiered rate limits for Moonshot AI / Kimi platform. Tier0 starts at $1 cumulative recharge
+  with very low limits; tiers progress to Tier5 ($3,000 cumulative) with up to 1,000 concurrency,
+  10K RPM, 5M TPM, and unlimited TPD.
+notes: >-
+  Vouchers do not count toward cumulative recharge. Cluster capacity events may temporarily
+  reduce effective ceilings. Contact api-service@moonshot.ai for higher limits.
 sources:
-- https://www.moonshot.ai/
+- https://platform.kimi.ai/docs/pricing/limits
 responseCodes:
   throttled: 429
 limits:
-- name: Default
+- name: Tier0 (>= $1 recharge)
   scope: account
-  metric: varies
-  limit: see provider documentation
-  notes: Pending reconciliation.
+  metric: requests-per-minute
+  limit: 3
+  notes: Concurrency 1, TPM 500K, TPD 1.5M.
+- name: Tier1 (>= $10 recharge)
+  scope: account
+  metric: requests-per-minute
+  limit: 200
+  notes: Concurrency 50, TPM 2M, TPD unlimited.
+- name: Tier5 (>= $3000 recharge)
+  scope: account
+  metric: requests-per-minute
+  limit: 10000
+  notes: Concurrency 1000, TPM 5M, TPD unlimited.
+- name: Concurrency Tier0
+  scope: account
+  metric: concurrent-requests
+  limit: 1
+- name: Concurrency Tier5
+  scope: account
+  metric: concurrent-requests
+  limit: 1000
 policies:
 - name: Backoff Strategy
-  description: Clients should implement exponential backoff with jitter and honor any Retry-After header.
+  description: Clients should implement exponential backoff with jitter and honor Retry-After.
+- name: Tier Upgrade
+  description: Cumulative recharge advances tier eligibility automatically; vouchers excluded.
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

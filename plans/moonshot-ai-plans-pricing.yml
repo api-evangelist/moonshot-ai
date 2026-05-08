@@ -5,7 +5,7 @@ provider: Moonshot AI
 providerId: moonshot-ai
 created: '2026-05-08'
 modified: '2026-05-08'
-reconciled: false
+reconciled: true
 tags:
 - AI
 - LLM
@@ -13,29 +13,83 @@ tags:
 - Long Context
 - Kimi
 - Plans
-description: Placeholder plans/pricing artifact for Moonshot AI. Replace with real published pricing once
-  the pipeline researches the provider's plans page.
-notes: Initial scaffold — plans/pricing have not yet been reconciled against the provider's documentation.
+description: >-
+  Pay-as-you-go plans for Moonshot AI / Kimi platform. Pricing is published per million tokens
+  with separate rates for input (cache hit/miss) and output across the Kimi K2.6, K2.5, K2,
+  and Moonshot V1 model families. Tier eligibility advances with cumulative account recharge.
+notes: >-
+  Pricing pages are published in CNY and USD; tiered rate limits gate concurrency, RPM, TPM,
+  and TPD by cumulative recharge. Document extraction and file storage are temporarily free
+  at the time of reconciliation.
 sources:
-- https://www.moonshot.ai/
+- https://platform.kimi.ai/docs/pricing/chat
+- https://platform.kimi.ai/docs/pricing/limits
 plans:
-- id: moonshot-ai-default
-  name: To Be Reconciled
-  type: enterprise
-  description: Initial scaffold; replace with provider plan tiers once pricing is reconciled.
+- id: moonshot-ai-pay-as-you-go
+  name: Pay-As-You-Go (Token Metered)
+  type: usage
+  description: >-
+    Per-token billing across Moonshot AI's chat completion, file, and batch APIs. Tier upgrades
+    (Tier0-Tier5) unlock higher concurrency and rate limits as the account's cumulative recharge
+    grows.
   entries:
-  - label: API Access
-    name: api_access
-    type: flat
-    metric: varies
+  - label: Chat Completions Input/Output
+    name: chat_tokens
+    type: usage
+    metric: tokens
+    limit: -1
+    timeFrame: usage
+    geo: global
+    unit: 1000000
+    price: see https://platform.kimi.ai/docs/pricing/chat
+    userMultiplied: false
+  - label: Batch Jobs (50% Discount)
+    name: batch_tokens
+    type: usage
+    metric: tokens
+    limit: -1
+    timeFrame: usage
+    geo: global
+    unit: 1000000
+    price: see https://platform.kimi.ai/docs/pricing/batch
+    userMultiplied: false
+  - label: Web Search Tool
+    name: web_search
+    type: usage
+    metric: searches
     limit: -1
     timeFrame: usage
     geo: global
     unit: 1
-    price: see https://www.moonshot.ai/
+    price: see https://platform.kimi.ai/docs/pricing/web-search
     userMultiplied: false
   elements:
-  - name: Pending Reconciliation
+  - name: Kimi K2.6 (multimodal, 256K context)
+  - name: Kimi K2.5 (trillion-parameter, multimodal)
+  - name: Kimi K2 (code/agent)
+  - name: Moonshot V1 (8K, 32K, 128K)
+  - name: File extraction (currently free)
+  - name: File storage (currently free)
+- id: moonshot-ai-enterprise
+  name: Enterprise
+  type: enterprise
+  description: >-
+    Custom contracted capacity for accounts requiring throughput beyond Tier5 or special SLAs.
+    Contact api-service@moonshot.ai.
+  entries:
+  - label: Custom Contract
+    name: custom
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: monthly
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Negotiated rate limits beyond Tier5
+  - name: Dedicated capacity
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
