@@ -1,7 +1,7 @@
 aid: moonshot-ai
 url: https://raw.githubusercontent.com/api-evangelist/moonshot-ai/refs/heads/main/apis.yml
 name: Moonshot AI
-x-type: company
+kind: company
 description: >-
   Moonshot AI is a Chinese foundation model company best known for Kimi, an LLM with industry-leading
   long-context capabilities. The Moonshot platform exposes OpenAI-compatible chat completion, files,
