@@ -1,0 +1,204 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Moonshot AI API — Batch
+  description: 'Moonshot AI API — Batch. 4 operations. Lead operation: Create Batch. Self-contained Naftiko capability covering
+    one Moonshot Ai business surface.'
+  tags:
+  - Moonshot Ai
+  - Batch
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MOONSHOT_AI_API_KEY: MOONSHOT_AI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: moonshot-ai-batch
+    baseUri: https://api.moonshot.ai
+    description: Moonshot AI API — Batch business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-batches
+      path: /v1/batches
+      operations:
+      - name: post
+        method: POST
+        description: Create Batch
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: get
+        method: GET
+        description: List Batches
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: after
+          in: query
+          type: string
+          description: Pagination cursor, pass the ID of the last batch from the previous page
+        - name: limit
+          in: query
+          type: integer
+          description: Number of results per page, default 20
+    - name: v1-batches-batch_id
+      path: /v1/batches/{batch_id}
+      operations:
+      - name: get
+        method: GET
+        description: Retrieve Batch
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: batch_id
+          in: path
+          type: string
+          description: The ID of the batch task
+          required: true
+    - name: v1-batches-batch_id-cancel
+      path: /v1/batches/{batch_id}/cancel
+      operations:
+      - name: post
+        method: POST
+        description: Cancel Batch
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: batch_id
+          in: path
+          type: string
+          description: The ID of the batch task
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.MOONSHOT_AI_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: moonshot-ai-batch-rest
+    port: 8080
+    description: REST adapter for Moonshot AI API — Batch. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/v1/batches
+      name: v1-batches
+      description: REST surface for v1-batches.
+      operations:
+      - method: POST
+        name: post
+        description: Create Batch
+        call: moonshot-ai-batch.post
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: get
+        description: List Batches
+        call: moonshot-ai-batch.get
+        with:
+          after: rest.after
+          limit: rest.limit
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/batches/{batch-id}
+      name: v1-batches-batch-id
+      description: REST surface for v1-batches-batch_id.
+      operations:
+      - method: GET
+        name: get
+        description: Retrieve Batch
+        call: moonshot-ai-batch.get
+        with:
+          batch_id: rest.batch_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/batches/{batch-id}/cancel
+      name: v1-batches-batch-id-cancel
+      description: REST surface for v1-batches-batch_id-cancel.
+      operations:
+      - method: POST
+        name: post
+        description: Cancel Batch
+        call: moonshot-ai-batch.post
+        with:
+          batch_id: rest.batch_id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: moonshot-ai-batch-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Moonshot AI API — Batch. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: create-batch
+      description: Create Batch
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: moonshot-ai-batch.post
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-batches
+      description: List Batches
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: moonshot-ai-batch.get
+      with:
+        after: tools.after
+        limit: tools.limit
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-batch
+      description: Retrieve Batch
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: moonshot-ai-batch.get
+      with:
+        batch_id: tools.batch_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cancel-batch
+      description: Cancel Batch
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: moonshot-ai-batch.post
+      with:
+        batch_id: tools.batch_id
+      outputParameters:
+      - type: object
+        mapping: $.
