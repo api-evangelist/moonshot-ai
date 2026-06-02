@@ -1,0 +1,533 @@
+asyncapi: 2.6.0
+info:
+  title: Moonshot AI Chat Completions Streaming API
+  version: 1.0.0
+  description: |
+    AsyncAPI 2.6 description of the Moonshot AI streaming chat completions
+    surface. Moonshot's `/v1/chat/completions` endpoint is OpenAI-compatible
+    and, when invoked with `stream: true`, delivers incremental chat
+    completion chunks over an HTTP response body using Server-Sent Events
+    (SSE).
+
+    A client opens a single POST request to `/v1/chat/completions` carrying
+    the chat request payload. The server holds the response open and writes
+    a sequence of `data:` lines, each carrying one JSON-encoded
+    `chat.completion.chunk` object. The stream terminates with a literal
+    `data: [DONE]` sentinel followed by connection close.
+
+    This document models that one-way server-to-client streaming channel:
+    the request payload (publish from the application's perspective) and
+    the sequence of streamed chunks plus the terminating sentinel
+    (subscribe from the application's perspective).
+  contact:
+    name: Moonshot AI Platform
+    url: https://platform.moonshot.ai/docs
+  license:
+    name: Proprietary
+  externalDocs:
+    description: Moonshot AI Platform documentation
+    url: https://platform.moonshot.ai/docs
+  tags:
+    - name: chat
+    - name: completions
+    - name: streaming
+    - name: sse
+    - name: kimi
+
+defaultContentType: application/json
+
+servers:
+  production:
+    url: api.moonshot.ai
+    protocol: https
+    protocolVersion: '1.1'
+    description: |
+      Moonshot AI global platform endpoint. All requests are made over HTTPS.
+      Streaming responses are delivered as `text/event-stream` (SSE) when
+      the request body sets `stream: true`.
+    security:
+      - bearerAuth: []
+  productionCN:
+    url: api.moonshot.cn
+    protocol: https
+    protocolVersion: '1.1'
+    description: |
+      Moonshot AI China platform endpoint (api.moonshot.cn). Identical
+      OpenAI-compatible surface as the global endpoint.
+    security:
+      - bearerAuth: []
+
+channels:
+  v1/chat/completions:
+    description: |
+      HTTP+SSE channel for streaming chat completions. The client POSTs a
+      chat request with `stream: true` and the server responds with a
+      `text/event-stream` body. Each event is a `data:` line whose value
+      is either a JSON `chat.completion.chunk` object or the literal
+      string `[DONE]`.
+    bindings:
+      http:
+        type: request
+        method: POST
+        bindingVersion: '0.3.0'
+    publish:
+      operationId: createChatCompletionStream
+      summary: Open a streaming chat completion request.
+      description: |
+        Sends a chat completion request to Moonshot AI with `stream: true`.
+        Subsequent server output is delivered on this same HTTP connection
+        as the subscribe operation's messages.
+      bindings:
+        http:
+          type: request
+          method: POST
+          bindingVersion: '0.3.0'
+      message:
+        $ref: '#/components/messages/ChatCompletionStreamRequest'
+    subscribe:
+      operationId: receiveChatCompletionChunks
+      summary: Receive streamed chat completion chunks.
+      description: |
+        After the request is accepted, the server emits a sequence of SSE
+        events. Each event has either a `chat.completion.chunk` JSON
+        payload or the literal `[DONE]` sentinel which signals the end of
+        the stream and closes the connection.
+      bindings:
+        http:
+          type: response
+          bindingVersion: '0.3.0'
+      message:
+        oneOf:
+          - $ref: '#/components/messages/ChatCompletionChunkEvent'
+          - $ref: '#/components/messages/ChatCompletionDoneEvent'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API Key
+      description: |
+        Moonshot platform API key, presented as
+        `Authorization: Bearer {MOONSHOT_API_KEY}`. Keys are issued from
+        the platform console at
+        https://platform.moonshot.ai/console/api-keys.
+
+  messages:
+    ChatCompletionStreamRequest:
+      name: ChatCompletionStreamRequest
+      title: Chat Completion Stream Request
+      summary: Client request body that opens a streaming chat completion.
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          Authorization:
+            type: string
+            description: Bearer token, e.g. `Bearer sk-...`.
+          Accept:
+            type: string
+            description: |
+              Should be `text/event-stream` for streaming responses.
+              Moonshot also accepts `application/json` and will switch
+              based on the `stream` field of the body.
+            default: text/event-stream
+          Content-Type:
+            type: string
+            const: application/json
+        required:
+          - Authorization
+          - Content-Type
+      payload:
+        $ref: '#/components/schemas/ChatCompletionRequest'
+      examples:
+        - name: minimal-stream-request
+          summary: Minimal streaming request for kimi-k2-0905-preview
+          payload:
+            model: kimi-k2-0905-preview
+            stream: true
+            messages:
+              - role: system
+                content: You are Kimi, a helpful assistant.
+              - role: user
+                content: Hello, who are you?
+
+    ChatCompletionChunkEvent:
+      name: ChatCompletionChunkEvent
+      title: Chat Completion Chunk (SSE data event)
+      summary: |
+        One streamed `chat.completion.chunk` object. Delivered on the wire
+        as `data: {json}\n\n`.
+      contentType: application/json
+      bindings:
+        http:
+          headers:
+            type: object
+            properties:
+              Content-Type:
+                type: string
+                const: text/event-stream
+              Cache-Control:
+                type: string
+                const: no-cache
+          bindingVersion: '0.3.0'
+      payload:
+        $ref: '#/components/schemas/ChatCompletionChunk'
+      examples:
+        - name: role-chunk
+          summary: First chunk carrying the assistant role
+          payload:
+            id: chatcmpl-abc123
+            object: chat.completion.chunk
+            created: 1748563200
+            model: kimi-k2-0905-preview
+            choices:
+              - index: 0
+                delta:
+                  role: assistant
+                  content: ''
+                finish_reason: null
+        - name: content-delta-chunk
+          summary: Intermediate chunk carrying a content delta
+          payload:
+            id: chatcmpl-abc123
+            object: chat.completion.chunk
+            created: 1748563200
+            model: kimi-k2-0905-preview
+            choices:
+              - index: 0
+                delta:
+                  content: Hello
+                finish_reason: null
+        - name: tool-call-chunk
+          summary: Intermediate chunk carrying a tool-call delta
+          payload:
+            id: chatcmpl-abc123
+            object: chat.completion.chunk
+            created: 1748563200
+            model: kimi-k2-0905-preview
+            choices:
+              - index: 0
+                delta:
+                  tool_calls:
+                    - index: 0
+                      id: call_abc
+                      type: function
+                      function:
+                        name: get_weather
+                        arguments: '{"city":'
+                finish_reason: null
+        - name: terminal-stop-chunk
+          summary: Final content chunk with finish_reason stop
+          payload:
+            id: chatcmpl-abc123
+            object: chat.completion.chunk
+            created: 1748563200
+            model: kimi-k2-0905-preview
+            choices:
+              - index: 0
+                delta: {}
+                finish_reason: stop
+        - name: usage-chunk
+          summary: |
+            Final chunk carrying usage stats. Emitted when the request
+            sets `stream_options.include_usage: true`.
+          payload:
+            id: chatcmpl-abc123
+            object: chat.completion.chunk
+            created: 1748563200
+            model: kimi-k2-0905-preview
+            choices: []
+            usage:
+              prompt_tokens: 24
+              completion_tokens: 18
+              total_tokens: 42
+
+    ChatCompletionDoneEvent:
+      name: ChatCompletionDoneEvent
+      title: 'Stream Terminator (`data: [DONE]`)'
+      summary: |
+        Sentinel event marking the end of the SSE stream. Delivered on
+        the wire as the literal `data: [DONE]\n\n`. The payload is the
+        string `[DONE]` (not JSON).
+      contentType: text/plain
+      payload:
+        type: string
+        const: '[DONE]'
+        description: Literal sentinel string that closes the SSE stream.
+      examples:
+        - name: done
+          summary: End-of-stream sentinel
+          payload: '[DONE]'
+
+  schemas:
+    ChatCompletionRequest:
+      type: object
+      description: |
+        OpenAI-compatible chat completion request as accepted by
+        `/v1/chat/completions`. Only the fields material to streaming
+        are modeled here. The full property set is documented in the
+        Moonshot OpenAPI (`openapi/moonshot-ai-openapi.json`).
+      required:
+        - model
+        - messages
+        - stream
+      properties:
+        model:
+          type: string
+          description: |
+            Target Moonshot model id, for example `kimi-k2.6`, `kimi-k2.5`,
+            `kimi-k2-0905-preview`, `kimi-k2-0711-preview`,
+            `kimi-k2-turbo-preview`, `kimi-k2-thinking`,
+            `kimi-k2-thinking-turbo`, `moonshot-v1-8k`, `moonshot-v1-32k`,
+            `moonshot-v1-128k`, `moonshot-v1-auto`, or one of the vision
+            preview variants.
+        messages:
+          type: array
+          description: Chat history (system, user, assistant, tool messages).
+          items:
+            $ref: '#/components/schemas/ChatMessage'
+        stream:
+          type: boolean
+          const: true
+          description: |
+            Must be `true` for this channel. When set, the server returns
+            `text/event-stream` and the response is a sequence of
+            `chat.completion.chunk` events terminated by `data: [DONE]`.
+        stream_options:
+          type: object
+          description: Streaming behavior options.
+          properties:
+            include_usage:
+              type: boolean
+              description: |
+                When `true`, an additional final chunk carrying token
+                `usage` statistics is emitted before the `[DONE]`
+                sentinel.
+        temperature:
+          type: number
+        top_p:
+          type: number
+        n:
+          type: integer
+        max_tokens:
+          type: integer
+        max_completion_tokens:
+          type: integer
+        stop:
+          oneOf:
+            - type: string
+            - type: array
+              items:
+                type: string
+        presence_penalty:
+          type: number
+        frequency_penalty:
+          type: number
+        response_format:
+          type: object
+        tools:
+          type: array
+          description: Function/tool definitions the model may call.
+          items:
+            type: object
+        tool_choice:
+          oneOf:
+            - type: string
+            - type: object
+        user:
+          type: string
+
+    ChatMessage:
+      type: object
+      required:
+        - role
+      properties:
+        role:
+          type: string
+          enum:
+            - system
+            - user
+            - assistant
+            - tool
+        content:
+          oneOf:
+            - type: string
+            - type: array
+              items:
+                type: object
+            - type: 'null'
+        name:
+          type: string
+        tool_call_id:
+          type: string
+          description: Required on `tool` role messages.
+        tool_calls:
+          type: array
+          items:
+            $ref: '#/components/schemas/ToolCall'
+
+    ChatCompletionChunk:
+      type: object
+      description: |
+        One streamed chunk of a chat completion. The first chunk for a
+        choice typically carries `delta.role = "assistant"`; subsequent
+        chunks carry incremental `delta.content` or `delta.tool_calls`
+        fragments; the final chunk for a choice carries a non-null
+        `finish_reason`.
+      required:
+        - id
+        - object
+        - created
+        - model
+        - choices
+      properties:
+        id:
+          type: string
+          description: Unique identifier shared across all chunks for one completion.
+        object:
+          type: string
+          const: chat.completion.chunk
+        created:
+          type: integer
+          format: int64
+          description: Unix timestamp (seconds) when the completion was created.
+        model:
+          type: string
+          description: Model that produced the chunk.
+        system_fingerprint:
+          type: string
+          description: Backend configuration fingerprint, when available.
+        choices:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatCompletionChunkChoice'
+        usage:
+          allOf:
+            - $ref: '#/components/schemas/Usage'
+          description: |
+            Token usage statistics. `null` (or omitted) on intermediate
+            chunks. Populated on the final chunk when the request set
+            `stream_options.include_usage: true`.
+
+    ChatCompletionChunkChoice:
+      type: object
+      required:
+        - index
+        - delta
+      properties:
+        index:
+          type: integer
+          description: Choice index (matches request `n`; usually `0`).
+        delta:
+          $ref: '#/components/schemas/ChoiceDelta'
+        finish_reason:
+          description: |
+            `null` while the model is still generating. Populated on the
+            terminal chunk for the choice.
+          oneOf:
+            - type: 'null'
+            - type: string
+              enum:
+                - stop
+                - length
+                - tool_calls
+                - content_filter
+        logprobs:
+          oneOf:
+            - type: 'null'
+            - type: object
+
+    ChoiceDelta:
+      type: object
+      description: |
+        Incremental update applied to the assistant message under
+        construction. The first chunk typically carries `role`;
+        subsequent chunks carry `content` fragments or `tool_calls`
+        fragments. The terminal chunk often carries an empty object.
+      properties:
+        role:
+          type: string
+          enum:
+            - assistant
+          description: Present on the first delta of a streamed assistant message.
+        content:
+          oneOf:
+            - type: string
+            - type: 'null'
+          description: Incremental text fragment to append to the running content.
+        tool_calls:
+          type: array
+          description: Incremental tool-call fragments.
+          items:
+            $ref: '#/components/schemas/ToolCallDelta'
+
+    ToolCallDelta:
+      type: object
+      description: |
+        Streamed fragment of a tool call. The `index` identifies the
+        position of the tool call within the assistant message; `id`,
+        `type`, and `function.name` typically appear on the first
+        fragment for a given index, while `function.arguments` is built
+        up across subsequent fragments as a partial JSON string.
+      required:
+        - index
+      properties:
+        index:
+          type: integer
+        id:
+          type: string
+        type:
+          type: string
+          enum:
+            - function
+        function:
+          type: object
+          properties:
+            name:
+              type: string
+            arguments:
+              type: string
+              description: |
+                Partial JSON string. Concatenate `arguments` across
+                fragments with the same `index` to reconstruct the full
+                tool-call arguments object.
+
+    ToolCall:
+      type: object
+      required:
+        - id
+        - type
+        - function
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum:
+            - function
+        function:
+          type: object
+          required:
+            - name
+            - arguments
+          properties:
+            name:
+              type: string
+            arguments:
+              type: string
+
+    Usage:
+      type: object
+      description: Token accounting for the completed request.
+      properties:
+        prompt_tokens:
+          type: integer
+        completion_tokens:
+          type: integer
+        total_tokens:
+          type: integer
+        cached_tokens:
+          type: integer
+          description: |
+            Tokens served from Moonshot's context cache, when applicable.

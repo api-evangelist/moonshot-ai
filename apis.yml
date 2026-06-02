@@ -13,7 +13,7 @@ tags:
   - Long Context
   - Kimi
 created: '2026-05-08'
-modified: '2026-05-19'
+modified: '2026-05-30'
 specificationVersion: '0.19'
 apis:
   - aid: moonshot-ai:platform
@@ -38,6 +38,8 @@ apis:
       url: https://platform.kimi.ai/docs
     - type: OpenAPI
       url: openapi/moonshot-ai-openapi.json
+    - type: AsyncAPI
+      url: asyncapi/moonshot-ai-chat-completions-asyncapi.yml
     - type: SignUp
       url: https://platform.kimi.ai/console/api-keys
     - type: Pricing
