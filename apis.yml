@@ -6,7 +6,7 @@ description: >-
   Moonshot AI is a Chinese foundation model company best known for Kimi, an LLM with industry-leading long-context
   capabilities. The Moonshot platform exposes OpenAI-compatible chat completion, files, batch, models, balance, and
   token-estimation APIs.
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - AI
   - LLM
@@ -23,7 +23,7 @@ apis:
       OpenAI-compatible inference API for Kimi K2.6, K2.5, K2, and Moonshot V1 models. Supports chat completions (incl.
       partial mode and tool use), models listing, file upload and content extraction, batch jobs, account balance, and
       token estimation.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://platform.kimi.ai/docs
     baseURL: https://api.moonshot.ai
     tags:
