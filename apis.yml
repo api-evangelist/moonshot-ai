@@ -42,7 +42,7 @@ apis:
         url: openapi/moonshot-ai-openapi.json
       - type: AsyncAPI
         url: asyncapi/moonshot-ai-chat-completions-asyncapi.yml
-      - type: SignUp
+      - type: Signup
         url: https://platform.kimi.ai/console/api-keys
       - type: Pricing
         url: https://platform.kimi.ai/docs/pricing/chat
