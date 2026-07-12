@@ -1,0 +1,15 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/moonshot-ai-openapi.json
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: The Authorization header expects a Bearer token. Use an MOONSHOT_API_KEY as the
+    token. This is a server-side secret key. Generate one on the [API keys page](https://platform.kimi.ai/console/api-keys)
+    in your dashboard.
+  sources:
+  - openapi/moonshot-ai-openapi.json

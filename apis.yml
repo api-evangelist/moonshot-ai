@@ -51,6 +51,10 @@ apis:
       - type: Playground
         url: https://platform.kimi.ai/playground
 common:
+  - type: DomainSecurity
+    url: security/moonshot-ai-domain-security.yml
+  - type: Authentication
+    url: authentication/moonshot-ai-authentication.yml
   - type: GitHubOrganization
     url: https://github.com/MoonshotAI
   - type: LinkedIn
