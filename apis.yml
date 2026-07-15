@@ -51,6 +51,8 @@ apis:
       - type: Playground
         url: https://platform.kimi.ai/playground
 common:
+  - type: AgenticAccess
+    url: agentic-access/moonshot-ai-agentic-access.yml
   - type: DomainSecurity
     url: security/moonshot-ai-domain-security.yml
   - type: Authentication
