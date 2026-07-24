@@ -1,0 +1,92 @@
+openapi: 3.1.0
+info:
+  title: Moonshot AI Batch Models API
+  version: 1.0.0
+  description: API for Moonshot AI / Kimi large language model services
+servers:
+- url: https://api.moonshot.ai
+  description: Production
+tags:
+- name: Models
+paths:
+  /v1/models:
+    get:
+      summary: List Models
+      description: List all currently available models.
+      tags:
+      - Models
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Model list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  object:
+                    type: string
+                    example: list
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: Model ID
+                          example: kimi-k2.5
+                        object:
+                          type: string
+                          example: model
+                        created:
+                          type: integer
+                          description: Creation timestamp
+                        owned_by:
+                          type: string
+                          example: moonshot
+                        context_length:
+                          type: integer
+                          description: Maximum context length (tokens)
+                        supports_image_in:
+                          type: boolean
+                          description: Whether the model supports image input
+                        supports_video_in:
+                          type: boolean
+                          description: Whether the model supports video input
+                        supports_reasoning:
+                          type: boolean
+                          description: Whether the model supports deep thinking
+        '401':
+          description: Unauthorized - Invalid or missing API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+              description: Error message describing what went wrong
+            type:
+              type: string
+              description: Error type
+            code:
+              type: string
+              description: Error code
+          required:
+          - message
+      required:
+      - error
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: The Authorization header expects a Bearer token. Use an MOONSHOT_API_KEY as the token. This is a server-side secret key. Generate one on the [API keys page](https://platform.kimi.ai/console/api-keys) in your dashboard.

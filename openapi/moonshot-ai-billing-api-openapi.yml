@@ -1,0 +1,105 @@
+openapi: 3.1.0
+info:
+  title: Moonshot AI Batch Billing API
+  version: 1.0.0
+  description: API for Moonshot AI / Kimi large language model services
+servers:
+- url: https://api.moonshot.ai
+  description: Production
+tags:
+- name: Billing
+paths:
+  /v1/users/me/balance:
+    get:
+      summary: Check Balance
+      description: REST API to check your available, voucher, and cash balances on Kimi OpenPlatform.
+      tags:
+      - Billing
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Balance information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BalanceResponse'
+        '401':
+          description: Unauthorized - Invalid or missing API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+              description: Error message describing what went wrong
+            type:
+              type: string
+              description: Error type
+            code:
+              type: string
+              description: Error code
+          required:
+          - message
+      required:
+      - error
+    BalanceResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: Response code. 0 indicates success.
+        data:
+          type: object
+          properties:
+            available_balance:
+              type: number
+              format: float
+              description: 'The available balance (unit: USD), including cash balance and voucher balance. When it is less than or equal to 0, the user cannot call the inference API'
+              example: 49.58894
+            voucher_balance:
+              type: number
+              format: float
+              description: 'The voucher balance (unit: USD), which cannot be negative'
+              example: 46.58893
+            cash_balance:
+              type: number
+              format: float
+              description: 'The cash balance (unit: USD), which can be negative, indicating that the user owes money. When it is negative, available_balance is equal to the value of voucher_balance'
+              example: 3.00001
+          required:
+          - available_balance
+          - voucher_balance
+          - cash_balance
+        scode:
+          type: string
+          description: Status code
+          example: '0x0'
+        status:
+          type: boolean
+          description: Request status
+          example: true
+      required:
+      - code
+      - data
+      - scode
+      - status
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: The Authorization header expects a Bearer token. Use an MOONSHOT_API_KEY as the token. This is a server-side secret key. Generate one on the [API keys page](https://platform.kimi.ai/console/api-keys) in your dashboard.
