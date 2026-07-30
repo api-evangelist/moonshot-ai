@@ -6,7 +6,20 @@ description: >-
   Moonshot AI is a Chinese foundation model company best known for Kimi, an LLM with industry-leading long-context
   capabilities. The Moonshot platform exposes OpenAI-compatible chat completion, files, batch, models, balance, and
   token-estimation APIs.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: enterprise
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Enterprise · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/moonshot-ai.png
 tags:
   - AI
   - LLM
@@ -17,39 +30,138 @@ created: '2026-05-08'
 modified: '2026-05-30'
 specificationVersion: '0.19'
 apis:
-  - aid: moonshot-ai:platform
-    name: Moonshot AI Platform API
-    description: >-
-      OpenAI-compatible inference API for Kimi K2.6, K2.5, K2, and Moonshot V1 models. Supports chat completions (incl.
-      partial mode and tool use), models listing, file upload and content extraction, batch jobs, account balance, and
-      token estimation.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://platform.kimi.ai/docs
-    baseURL: https://api.moonshot.ai
-    tags:
-      - AI
-      - LLM
-      - Chat Completions
-      - Embeddings
-      - Files
-      - Batch
-      - Long Context
-      - Kimi
-    properties:
-      - type: Documentation
-        url: https://platform.kimi.ai/docs
-      - type: OpenAPI
-        url: openapi/moonshot-ai-openapi.json
-      - type: AsyncAPI
-        url: asyncapi/moonshot-ai-chat-completions-asyncapi.yml
-      - type: Signup
-        url: https://platform.kimi.ai/console/api-keys
-      - type: Pricing
-        url: https://platform.kimi.ai/docs/pricing/chat
-      - type: RateLimits
-        url: https://platform.kimi.ai/docs/pricing/limits
-      - type: Playground
-        url: https://platform.kimi.ai/playground
+- aid: moonshot-ai:moonshot-ai-batch-api
+  name: Moonshot AI Batch API
+  description: The Batch API from Moonshot AI — 3 operation(s) for batch.
+  humanURL: https://platform.kimi.ai/docs
+  baseURL: https://api.moonshot.ai
+  tags:
+  - Batch
+  properties:
+  - type: OpenAPI
+    url: openapi/moonshot-ai-batch-api-openapi.yml
+  - type: Documentation
+    url: https://platform.kimi.ai/docs
+  - type: AsyncAPI
+    url: asyncapi/moonshot-ai-chat-completions-asyncapi.yml
+  - type: Signup
+    url: https://platform.kimi.ai/console/api-keys
+  - type: Pricing
+    url: https://platform.kimi.ai/docs/pricing/chat
+  - type: RateLimits
+    url: https://platform.kimi.ai/docs/pricing/limits
+  - type: Playground
+    url: https://platform.kimi.ai/playground
+- aid: moonshot-ai:moonshot-ai-billing-api
+  name: Moonshot AI Billing API
+  description: The Billing API from Moonshot AI — 1 operation(s) for billing.
+  humanURL: https://platform.kimi.ai/docs
+  baseURL: https://api.moonshot.ai
+  tags:
+  - Billing
+  properties:
+  - type: OpenAPI
+    url: openapi/moonshot-ai-billing-api-openapi.yml
+  - type: Documentation
+    url: https://platform.kimi.ai/docs
+  - type: AsyncAPI
+    url: asyncapi/moonshot-ai-chat-completions-asyncapi.yml
+  - type: Signup
+    url: https://platform.kimi.ai/console/api-keys
+  - type: Pricing
+    url: https://platform.kimi.ai/docs/pricing/chat
+  - type: RateLimits
+    url: https://platform.kimi.ai/docs/pricing/limits
+  - type: Playground
+    url: https://platform.kimi.ai/playground
+- aid: moonshot-ai:moonshot-ai-chat-api
+  name: Moonshot AI Chat API
+  description: The Chat API from Moonshot AI — 1 operation(s) for chat.
+  humanURL: https://platform.kimi.ai/docs
+  baseURL: https://api.moonshot.ai
+  tags:
+  - Chat
+  properties:
+  - type: OpenAPI
+    url: openapi/moonshot-ai-chat-api-openapi.yml
+  - type: Documentation
+    url: https://platform.kimi.ai/docs
+  - type: AsyncAPI
+    url: asyncapi/moonshot-ai-chat-completions-asyncapi.yml
+  - type: Signup
+    url: https://platform.kimi.ai/console/api-keys
+  - type: Pricing
+    url: https://platform.kimi.ai/docs/pricing/chat
+  - type: RateLimits
+    url: https://platform.kimi.ai/docs/pricing/limits
+  - type: Playground
+    url: https://platform.kimi.ai/playground
+- aid: moonshot-ai:moonshot-ai-files-api
+  name: Moonshot AI Files API
+  description: The Files API from Moonshot AI — 3 operation(s) for files.
+  humanURL: https://platform.kimi.ai/docs
+  baseURL: https://api.moonshot.ai
+  tags:
+  - Files
+  properties:
+  - type: OpenAPI
+    url: openapi/moonshot-ai-files-api-openapi.yml
+  - type: Documentation
+    url: https://platform.kimi.ai/docs
+  - type: AsyncAPI
+    url: asyncapi/moonshot-ai-chat-completions-asyncapi.yml
+  - type: Signup
+    url: https://platform.kimi.ai/console/api-keys
+  - type: Pricing
+    url: https://platform.kimi.ai/docs/pricing/chat
+  - type: RateLimits
+    url: https://platform.kimi.ai/docs/pricing/limits
+  - type: Playground
+    url: https://platform.kimi.ai/playground
+- aid: moonshot-ai:moonshot-ai-models-api
+  name: Moonshot AI Models API
+  description: The Models API from Moonshot AI — 1 operation(s) for models.
+  humanURL: https://platform.kimi.ai/docs
+  baseURL: https://api.moonshot.ai
+  tags:
+  - Models
+  properties:
+  - type: OpenAPI
+    url: openapi/moonshot-ai-models-api-openapi.yml
+  - type: Documentation
+    url: https://platform.kimi.ai/docs
+  - type: AsyncAPI
+    url: asyncapi/moonshot-ai-chat-completions-asyncapi.yml
+  - type: Signup
+    url: https://platform.kimi.ai/console/api-keys
+  - type: Pricing
+    url: https://platform.kimi.ai/docs/pricing/chat
+  - type: RateLimits
+    url: https://platform.kimi.ai/docs/pricing/limits
+  - type: Playground
+    url: https://platform.kimi.ai/playground
+- aid: moonshot-ai:moonshot-ai-utilities-api
+  name: Moonshot AI Utilities API
+  description: The Utilities API from Moonshot AI — 1 operation(s) for utilities.
+  humanURL: https://platform.kimi.ai/docs
+  baseURL: https://api.moonshot.ai
+  tags:
+  - Utilities
+  properties:
+  - type: OpenAPI
+    url: openapi/moonshot-ai-utilities-api-openapi.yml
+  - type: Documentation
+    url: https://platform.kimi.ai/docs
+  - type: AsyncAPI
+    url: asyncapi/moonshot-ai-chat-completions-asyncapi.yml
+  - type: Signup
+    url: https://platform.kimi.ai/console/api-keys
+  - type: Pricing
+    url: https://platform.kimi.ai/docs/pricing/chat
+  - type: RateLimits
+    url: https://platform.kimi.ai/docs/pricing/limits
+  - type: Playground
+    url: https://platform.kimi.ai/playground
 common:
   - type: AgenticAccess
     url: agentic-access/moonshot-ai-agentic-access.yml
