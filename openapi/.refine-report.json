@@ -1,0 +1,24 @@
+{
+  "provider": "moonshot-ai",
+  "sources": [
+    "moonshot-ai-batch-api-openapi.yml",
+    "moonshot-ai-billing-api-openapi.yml",
+    "moonshot-ai-chat-api-openapi.yml",
+    "moonshot-ai-files-api-openapi.yml",
+    "moonshot-ai-models-api-openapi.yml",
+    "moonshot-ai-utilities-api-openapi.yml"
+  ],
+  "outputs": [
+    "moonshot-ai-batch-api-openapi.yml",
+    "moonshot-ai-billing-api-openapi.yml",
+    "moonshot-ai-chat-api-openapi.yml",
+    "moonshot-ai-files-api-openapi.yml",
+    "moonshot-ai-models-api-openapi.yml",
+    "moonshot-ai-utilities-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
