@@ -1,0 +1,302 @@
+{
+  "item": [
+    {
+      "id": "74143a14-3b00-4b1d-aedd-7cb33f4867d6",
+      "name": "Chat",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2f5046a4-a6d7-45a1-abde-3635158c3778",
+          "name": "Create Chat Completion",
+          "request": {
+            "name": "Create Chat Completion",
+            "description": {
+              "content": "Creates a completion for the chat message. Supports standard chat, Partial Mode, and Tool Use (Function Calling).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "chat",
+                "completions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"messages\": [\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\",\n      \"name\": null,\n      \"partial\": false\n    },\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\",\n      \"name\": null,\n      \"partial\": false\n    }\n  ],\n  \"model\": \"kimi-k2.6\",\n  \"max_tokens\": \"<integer>\",\n  \"max_completion_tokens\": \"<integer>\",\n  \"response_format\": {\n    \"type\": \"<string>\",\n    \"json_schema\": {\n      \"name\": \"<string>\",\n      \"schema\": {\n        \"key_0\": true,\n        \"key_1\": 8516.754133569697\n      },\n      \"strict\": true\n    }\n  },\n  \"stop\": \"<string>\",\n  \"stream\": false,\n  \"stream_options\": {\n    \"include_usage\": false\n  },\n  \"tools\": [\n    {\n      \"type\": \"<string>\",\n      \"function\": {\n        \"name\": \"<string>\",\n        \"parameters\": {\n          \"key_0\": 1035\n        },\n        \"description\": \"<string>\",\n        \"strict\": true\n      }\n    },\n    {\n      \"type\": \"<string>\",\n      \"function\": {\n        \"name\": \"<string>\",\n        \"parameters\": {\n          \"key_0\": 2551,\n          \"key_1\": \"string\"\n        },\n        \"description\": \"<string>\",\n        \"strict\": true\n      }\n    }\n  ],\n  \"prompt_cache_key\": null,\n  \"safety_identifier\": \"<string>\",\n  \"thinking\": {\n    \"type\": \"<string>\",\n    \"keep\": \"<string,null>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8df47b29-02f5-4635-9254-66033ad6b0fd",
+              "name": "Chat completion response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "chat",
+                    "completions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"messages\": [\n    {\n      \"role\": \"assistant\",\n      \"content\": \"string\",\n      \"name\": null,\n      \"partial\": false\n    },\n    {\n      \"role\": \"system\",\n      \"content\": \"string\",\n      \"name\": null,\n      \"partial\": false\n    }\n  ],\n  \"model\": \"kimi-k2.6\",\n  \"max_tokens\": 8538,\n  \"max_completion_tokens\": 3249,\n  \"response_format\": {\n    \"type\": \"json_schema\",\n    \"json_schema\": {\n      \"name\": \"string\",\n      \"schema\": {\n        \"key_0\": 7374\n      },\n      \"strict\": true\n    }\n  },\n  \"stop\": \"string\",\n  \"stream\": false,\n  \"stream_options\": {\n    \"include_usage\": false\n  },\n  \"tools\": [\n    {\n      \"type\": \"function\",\n      \"function\": {\n        \"name\": \"OikS89XlEqJiy9xaFRYtPpvA7h5crD7Ko\",\n        \"parameters\": {\n          \"key_0\": 1550\n        },\n        \"description\": \"string\",\n        \"strict\": true\n      }\n    },\n    {\n      \"type\": \"function\",\n      \"function\": {\n        \"name\": \"oyrBhEHg5PEYmCBOLN_N_c8h3pTn\",\n        \"parameters\": {\n          \"key_0\": false,\n          \"key_1\": true\n        },\n        \"description\": \"string\",\n        \"strict\": true\n      }\n    }\n  ],\n  \"prompt_cache_key\": null,\n  \"safety_identifier\": \"string\",\n  \"thinking\": {\n    \"type\": \"disabled\",\n    \"keep\": \"all\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"object\": \"chat.completion\",\n  \"created\": 7966,\n  \"model\": \"string\",\n  \"choices\": [\n    {\n      \"index\": 4903,\n      \"message\": {\n        \"role\": \"assistant\",\n        \"content\": \"string\",\n        \"tool_calls\": [\n          {\n            \"id\": \"string\",\n            \"type\": \"function\",\n            \"function\": {\n              \"name\": \"string\",\n              \"arguments\": \"string\"\n            }\n          },\n          {\n            \"id\": \"string\",\n            \"type\": \"function\",\n            \"function\": {\n              \"name\": \"string\",\n              \"arguments\": \"string\"\n            }\n          }\n        ]\n      },\n      \"finish_reason\": \"stop\"\n    },\n    {\n      \"index\": 8221,\n      \"message\": {\n        \"role\": \"assistant\",\n        \"content\": \"string\",\n        \"tool_calls\": [\n          {\n            \"id\": \"string\",\n            \"type\": \"function\",\n            \"function\": {\n              \"name\": \"string\",\n              \"arguments\": \"string\"\n            }\n          },\n          {\n            \"id\": \"string\",\n            \"type\": \"function\",\n            \"function\": {\n              \"name\": \"string\",\n              \"arguments\": \"string\"\n            }\n          }\n        ]\n      },\n      \"finish_reason\": \"tool_calls\"\n    }\n  ],\n  \"usage\": {\n    \"prompt_tokens\": 9617,\n    \"completion_tokens\": 198,\n    \"total_tokens\": 7209\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "670bcfc0-287e-4729-b5c5-0a55549aa17f",
+              "name": "Bad request - Invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "chat",
+                    "completions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"messages\": [\n    {\n      \"role\": \"assistant\",\n      \"content\": \"string\",\n      \"name\": null,\n      \"partial\": false\n    },\n    {\n      \"role\": \"system\",\n      \"content\": \"string\",\n      \"name\": null,\n      \"partial\": false\n    }\n  ],\n  \"model\": \"kimi-k2.6\",\n  \"max_tokens\": 8538,\n  \"max_completion_tokens\": 3249,\n  \"response_format\": {\n    \"type\": \"json_schema\",\n    \"json_schema\": {\n      \"name\": \"string\",\n      \"schema\": {\n        \"key_0\": 7374\n      },\n      \"strict\": true\n    }\n  },\n  \"stop\": \"string\",\n  \"stream\": false,\n  \"stream_options\": {\n    \"include_usage\": false\n  },\n  \"tools\": [\n    {\n      \"type\": \"function\",\n      \"function\": {\n        \"name\": \"OikS89XlEqJiy9xaFRYtPpvA7h5crD7Ko\",\n        \"parameters\": {\n          \"key_0\": 1550\n        },\n        \"description\": \"string\",\n        \"strict\": true\n      }\n    },\n    {\n      \"type\": \"function\",\n      \"function\": {\n        \"name\": \"oyrBhEHg5PEYmCBOLN_N_c8h3pTn\",\n        \"parameters\": {\n          \"key_0\": false,\n          \"key_1\": true\n        },\n        \"description\": \"string\",\n        \"strict\": true\n      }\n    }\n  ],\n  \"prompt_cache_key\": null,\n  \"safety_identifier\": \"string\",\n  \"thinking\": {\n    \"type\": \"disabled\",\n    \"keep\": \"all\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"string\",\n    \"type\": \"string\",\n    \"code\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2986a2ac-8855-4eca-bf38-ebe504f90427",
+              "name": "Unauthorized - Invalid or missing API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "chat",
+                    "completions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"messages\": [\n    {\n      \"role\": \"assistant\",\n      \"content\": \"string\",\n      \"name\": null,\n      \"partial\": false\n    },\n    {\n      \"role\": \"system\",\n      \"content\": \"string\",\n      \"name\": null,\n      \"partial\": false\n    }\n  ],\n  \"model\": \"kimi-k2.6\",\n  \"max_tokens\": 8538,\n  \"max_completion_tokens\": 3249,\n  \"response_format\": {\n    \"type\": \"json_schema\",\n    \"json_schema\": {\n      \"name\": \"string\",\n      \"schema\": {\n        \"key_0\": 7374\n      },\n      \"strict\": true\n    }\n  },\n  \"stop\": \"string\",\n  \"stream\": false,\n  \"stream_options\": {\n    \"include_usage\": false\n  },\n  \"tools\": [\n    {\n      \"type\": \"function\",\n      \"function\": {\n        \"name\": \"OikS89XlEqJiy9xaFRYtPpvA7h5crD7Ko\",\n        \"parameters\": {\n          \"key_0\": 1550\n        },\n        \"description\": \"string\",\n        \"strict\": true\n      }\n    },\n    {\n      \"type\": \"function\",\n      \"function\": {\n        \"name\": \"oyrBhEHg5PEYmCBOLN_N_c8h3pTn\",\n        \"parameters\": {\n          \"key_0\": false,\n          \"key_1\": true\n        },\n        \"description\": \"string\",\n        \"strict\": true\n      }\n    }\n  ],\n  \"prompt_cache_key\": null,\n  \"safety_identifier\": \"string\",\n  \"thinking\": {\n    \"type\": \"disabled\",\n    \"keep\": \"all\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"string\",\n    \"type\": \"string\",\n    \"code\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6d1f8a58-6443-4d67-a2cc-a4c9a0b888c2",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "chat",
+                    "completions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"messages\": [\n    {\n      \"role\": \"assistant\",\n      \"content\": \"string\",\n      \"name\": null,\n      \"partial\": false\n    },\n    {\n      \"role\": \"system\",\n      \"content\": \"string\",\n      \"name\": null,\n      \"partial\": false\n    }\n  ],\n  \"model\": \"kimi-k2.6\",\n  \"max_tokens\": 8538,\n  \"max_completion_tokens\": 3249,\n  \"response_format\": {\n    \"type\": \"json_schema\",\n    \"json_schema\": {\n      \"name\": \"string\",\n      \"schema\": {\n        \"key_0\": 7374\n      },\n      \"strict\": true\n    }\n  },\n  \"stop\": \"string\",\n  \"stream\": false,\n  \"stream_options\": {\n    \"include_usage\": false\n  },\n  \"tools\": [\n    {\n      \"type\": \"function\",\n      \"function\": {\n        \"name\": \"OikS89XlEqJiy9xaFRYtPpvA7h5crD7Ko\",\n        \"parameters\": {\n          \"key_0\": 1550\n        },\n        \"description\": \"string\",\n        \"strict\": true\n      }\n    },\n    {\n      \"type\": \"function\",\n      \"function\": {\n        \"name\": \"oyrBhEHg5PEYmCBOLN_N_c8h3pTn\",\n        \"parameters\": {\n          \"key_0\": false,\n          \"key_1\": true\n        },\n        \"description\": \"string\",\n        \"strict\": true\n      }\n    }\n  ],\n  \"prompt_cache_key\": null,\n  \"safety_identifier\": \"string\",\n  \"thinking\": {\n    \"type\": \"disabled\",\n    \"keep\": \"all\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"string\",\n    \"type\": \"string\",\n    \"code\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.moonshot.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0db7a578-f18d-4a95-a905-de6ba6abb51a",
+    "name": "Moonshot AI Batch Chat API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for Moonshot AI / Kimi large language model services",
+      "type": "text/plain"
+    }
+  }
+}
