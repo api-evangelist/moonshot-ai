@@ -6,6 +6,18 @@ description: >-
   Moonshot AI is a Chinese foundation model company best known for Kimi, an LLM with industry-leading long-context
   capabilities. The Moonshot platform exposes OpenAI-compatible chat completion, files, batch, models, balance, and
   token-estimation APIs.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: enterprise
   onboarding: self-serve
