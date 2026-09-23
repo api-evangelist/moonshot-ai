@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Moonshot AI Batch Utilities API
+  title: Moonshot AI Utilities API
   version: 1.0.0
   description: API for Moonshot AI / Kimi large language model services
 servers:
@@ -48,22 +48,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      operationId: postV1TokenizersEstimateTokenCount
+      x-operation-id-source: derived
 components:
   schemas:
-    EstimateTokenResponse:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            total_tokens:
-              type: integer
-              description: Estimated total number of tokens
-              example: 80
-          required:
-          - total_tokens
-      required:
-      - data
     EstimateTokenRequest:
       type: object
       properties:
@@ -189,6 +177,20 @@ components:
       required:
       - role
       - content
+    EstimateTokenResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            total_tokens:
+              type: integer
+              description: Estimated total number of tokens
+              example: 80
+          required:
+          - total_tokens
+      required:
+      - data
   securitySchemes:
     bearerAuth:
       type: http

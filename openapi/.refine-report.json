@@ -1,12 +1,7 @@
 {
   "provider": "moonshot-ai",
   "sources": [
-    "moonshot-ai-batch-api-openapi.yml",
-    "moonshot-ai-billing-api-openapi.yml",
-    "moonshot-ai-chat-api-openapi.yml",
-    "moonshot-ai-files-api-openapi.yml",
-    "moonshot-ai-models-api-openapi.yml",
-    "moonshot-ai-utilities-api-openapi.yml"
+    "_original/moonshot-ai-openapi.json"
   ],
   "outputs": [
     "moonshot-ai-batch-api-openapi.yml",
@@ -19,6 +14,23 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "moonshot-ai-openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "moonshot-ai-openapi.json: declared missing tag: Batch",
+    "moonshot-ai-openapi.json: declared missing tag: Billing",
+    "moonshot-ai-openapi.json: declared missing tag: Chat",
+    "moonshot-ai-openapi.json: declared missing tag: Files",
+    "moonshot-ai-openapi.json: declared missing tag: Models",
+    "moonshot-ai-openapi.json: declared missing tag: Utilities",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "moonshot-ai-batch-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moonshot-ai-billing-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moonshot-ai-chat-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moonshot-ai-files-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moonshot-ai-models-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moonshot-ai-utilities-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

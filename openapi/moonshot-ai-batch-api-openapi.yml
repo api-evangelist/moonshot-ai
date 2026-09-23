@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Moonshot AI Batch API
   version: 1.0.0
@@ -48,6 +48,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      operationId: postV1Batches
+      x-operation-id-source: derived
     get:
       summary: List Batches
       description: List batch tasks for your organization.
@@ -88,6 +90,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      operationId: getV1Batches
+      x-operation-id-source: derived
   /v1/batches/{batch_id}:
     get:
       summary: Retrieve Batch
@@ -128,6 +132,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      operationId: getV1BatchesByBatchId
+      x-operation-id-source: derived
   /v1/batches/{batch_id}/cancel:
     post:
       summary: Cancel Batch
@@ -174,6 +180,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      operationId: postV1BatchesByBatchIdCancel
+      x-operation-id-source: derived
 components:
   schemas:
     BatchListResponse:
@@ -308,6 +316,22 @@ components:
       - status
       - created_at
       - request_counts
+    BatchRequestCounts:
+      type: object
+      properties:
+        completed:
+          type: integer
+          description: Number of completed requests
+        failed:
+          type: integer
+          description: Number of failed requests
+        total:
+          type: integer
+          description: Total number of requests
+      required:
+      - completed
+      - failed
+      - total
     BatchCreateRequest:
       type: object
       properties:
@@ -332,22 +356,6 @@ components:
       - input_file_id
       - endpoint
       - completion_window
-    BatchRequestCounts:
-      type: object
-      properties:
-        completed:
-          type: integer
-          description: Number of completed requests
-        failed:
-          type: integer
-          description: Number of failed requests
-        total:
-          type: integer
-          description: Total number of requests
-      required:
-      - completed
-      - failed
-      - total
   securitySchemes:
     bearerAuth:
       type: http

@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Moonshot AI Batch Files API
+  title: Moonshot AI Files API
   version: 1.0.0
   description: API for Moonshot AI / Kimi large language model services
 servers:
@@ -64,6 +64,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      operationId: postV1Files
+      x-operation-id-source: derived
     get:
       summary: List Files
       description: Lists all files uploaded by the current user.
@@ -90,6 +92,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      operationId: getV1Files
+      x-operation-id-source: derived
   /v1/files/{file_id}:
     get:
       summary: Get File Information
@@ -130,6 +134,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      operationId: getV1FilesByFileId
+      x-operation-id-source: derived
     delete:
       summary: Delete File
       description: Deletes a previously uploaded file.
@@ -169,6 +175,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      operationId: deleteV1FilesByFileId
+      x-operation-id-source: derived
   /v1/files/{file_id}/content:
     get:
       summary: Get File Content
@@ -210,50 +218,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      operationId: getV1FilesByFileIdContent
+      x-operation-id-source: derived
 components:
   schemas:
-    FileObject:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique file identifier
-        object:
-          type: string
-          description: Object type
-          example: file
-        bytes:
-          type: integer
-          description: File size in bytes
-        created_at:
-          type: integer
-          description: Unix timestamp when the file was created
-        filename:
-          type: string
-          description: Original file name
-        purpose:
-          type: string
-          description: 'Purpose used when uploading the file. file-extract: extract file contents; image: upload images for vision understanding; video: upload videos for video understanding; batch: upload JSONL files for batch processing'
-          enum:
-          - file-extract
-          - image
-          - video
-          - batch
-        status:
-          type: string
-          description: Processing status of the file
-          example: ready
-        status_details:
-          type: string
-          description: Additional status details when processing fails or returns warnings
-      required:
-      - id
-      - object
-      - bytes
-      - created_at
-      - filename
-      - purpose
-      - status
     FileDeleteResponse:
       type: object
       properties:
@@ -302,6 +270,48 @@ components:
           - message
       required:
       - error
+    FileObject:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique file identifier
+        object:
+          type: string
+          description: Object type
+          example: file
+        bytes:
+          type: integer
+          description: File size in bytes
+        created_at:
+          type: integer
+          description: Unix timestamp when the file was created
+        filename:
+          type: string
+          description: Original file name
+        purpose:
+          type: string
+          description: 'Purpose used when uploading the file. file-extract: extract file contents; image: upload images for vision understanding; video: upload videos for video understanding; batch: upload JSONL files for batch processing'
+          enum:
+          - file-extract
+          - image
+          - video
+          - batch
+        status:
+          type: string
+          description: Processing status of the file
+          example: ready
+        status_details:
+          type: string
+          description: Additional status details when processing fails or returns warnings
+      required:
+      - id
+      - object
+      - bytes
+      - created_at
+      - filename
+      - purpose
+      - status
   securitySchemes:
     bearerAuth:
       type: http
