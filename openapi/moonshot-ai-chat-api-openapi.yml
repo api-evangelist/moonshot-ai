@@ -154,60 +154,56 @@ components:
           description: A stable identifier used to help detect users of your application that may be violating usage policies. The ID should be a string that uniquely identifies each user. It is recommended to hash the username or email address to avoid sending any identifying information
       required:
       - messages
-    MoonshotV1ChatRequest:
-      title: moonshot-v1
-      allOf:
-      - $ref: '#/components/schemas/ChatRequestBase'
-      - type: object
-        properties:
-          model:
-            type: string
-            description: Model ID
-            enum:
-            - moonshot-v1-8k
-            - moonshot-v1-32k
-            - moonshot-v1-128k
-            - moonshot-v1-auto
-            - moonshot-v1-8k-vision-preview
-            - moonshot-v1-32k-vision-preview
-            - moonshot-v1-128k-vision-preview
-            default: moonshot-v1-128k
-          temperature:
-            type: number
-            format: float
-            description: The sampling temperature to use, ranging from 0 to 1. A higher value (e.g., 0.7) will make the output more random, while a lower value (e.g., 0.2) will make it more focused and deterministic. Default is 0.0.
-            default: 0
-            minimum: 0
-            maximum: 1
-          top_p:
-            type: number
-            format: float
-            description: Another sampling method, where the model considers the results of tokens with a cumulative probability mass of top_p. Thus, 0.1 means only considering the top 10% of tokens by probability mass. Generally, we suggest changing either this or the temperature, but not both at the same time. Default is 1.0.
-            default: 1
-            minimum: 0
-            maximum: 1
-          n:
-            type: integer
-            description: The number of results to generate for each input message. Default is 1, must not exceed 5. When the temperature is very close to 0, only 1 result can be returned.
-            default: 1
-            minimum: 1
-            maximum: 5
-          presence_penalty:
-            type: number
-            format: float
-            description: Presence penalty, a number between -2.0 and 2.0. A positive value will penalize new tokens based on whether they appear in the text, increasing the likelihood of the model discussing new topics
-            default: 0
-            minimum: -2
-            maximum: 2
-          frequency_penalty:
-            type: number
-            format: float
-            description: Frequency penalty, a number between -2.0 and 2.0. A positive value will penalize new tokens based on their existing frequency in the text, reducing the likelihood of the model repeating the same phrases verbatim
-            default: 0
-            minimum: -2
-            maximum: 2
-        required:
-        - model
+    ToolDefinition:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - function
+        function:
+          type: object
+          properties:
+            name:
+              type: string
+              description: 'Function name. Must follow the regex: ^[a-zA-Z_][a-zA-Z0-9-_]{2,63}$'
+              pattern: ^[a-zA-Z_][a-zA-Z0-9-_]{2,63}$
+            description:
+              type: string
+              description: Description of what the function does
+            parameters:
+              type: object
+              description: Function parameters as JSON Schema. Must conform to the MFJS (Moonshot Flavored JSON Schema) specification
+              additionalProperties: true
+            strict:
+              type: boolean
+              default: true
+              description: Whether to strictly constrain tool call arguments according to the parameters schema. Defaults to true. When false, only guarantees the output is a valid JSON object without enforcing internal structure.
+          required:
+          - name
+          - parameters
+      required:
+      - type
+      - function
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+              description: Error message describing what went wrong
+            type:
+              type: string
+              description: Error type
+            code:
+              type: string
+              description: Error code
+          required:
+          - message
+      required:
+      - error
     ChatCompletionResponse:
       type: object
       properties:
@@ -282,27 +278,8 @@ components:
             total_tokens:
               type: integer
               description: Total number of tokens used
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            message:
-              type: string
-              description: Error message describing what went wrong
-            type:
-              type: string
-              description: Error type
-            code:
-              type: string
-              description: Error code
-          required:
-          - message
-      required:
-      - error
-    KimiK26ChatRequest:
-      title: kimi-k2.6
+    KimiK25ChatRequest:
+      title: kimi-k2.5
       allOf:
       - $ref: '#/components/schemas/ChatRequestBase'
       - type: object
@@ -311,11 +288,11 @@ components:
             type: string
             description: Model ID
             enum:
-            - kimi-k2.6
-            default: kimi-k2.6
+            - kimi-k2.5
+            default: kimi-k2.5
           thinking:
             type: object
-            description: 'Controls whether thinking is enabled for the kimi-k2.6 model, and whether to fully preserve reasoning_content across multi-turn conversations. Optional parameter. Default value is {"type": "enabled"}.'
+            description: 'Controls whether thinking is enabled for the model. Optional parameter. Default value is {"type": "enabled"}.'
             properties:
               type:
                 type: string
@@ -323,21 +300,6 @@ components:
                 - enabled
                 - disabled
                 description: Enable or disable thinking capability
-              keep:
-                type:
-                - string
-                - 'null'
-                enum:
-                - all
-                - null
-                description: 'Controls whether reasoning_content from previous turns is preserved across a multi-turn conversation, i.e. whether to enable Preserved Thinking. Defaults to `null`, meaning historical thinking is NOT preserved.
-
-
-                  - `null` (default) or omitted: The server ignores reasoning_content from historical turns.
-
-                  - `"all"`: Preserves reasoning_content from historical turns and provides it to the model as part of the context, enabling Preserved Thinking. When using this, keep the reasoning_content from every historical assistant message in messages as-is. Recommended to use together with `type: "enabled"`.
-
-                  - Note: This parameter only affects reasoning_content from historical turns; it does not change whether the model produces/outputs thinking within the current turn (that is controlled by `type`). For best practices, see [Preserved Thinking](/guide/use-kimi-k2-thinking-model#preserved-thinking).'
             required:
             - type
             additionalProperties: false
@@ -393,8 +355,8 @@ components:
             maximum: 2
         required:
         - model
-    KimiK2ThinkingChatRequest:
-      title: kimi-k2-thinking
+    MoonshotV1ChatRequest:
+      title: moonshot-v1
       allOf:
       - $ref: '#/components/schemas/ChatRequestBase'
       - type: object
@@ -403,14 +365,19 @@ components:
             type: string
             description: Model ID
             enum:
-            - kimi-k2-thinking
-            - kimi-k2-thinking-turbo
-            default: kimi-k2-thinking
+            - moonshot-v1-8k
+            - moonshot-v1-32k
+            - moonshot-v1-128k
+            - moonshot-v1-auto
+            - moonshot-v1-8k-vision-preview
+            - moonshot-v1-32k-vision-preview
+            - moonshot-v1-128k-vision-preview
+            default: moonshot-v1-128k
           temperature:
             type: number
             format: float
-            description: The sampling temperature to use, ranging from 0 to 1. A higher value (e.g., 0.7) will make the output more random, while a lower value (e.g., 0.2) will make it more focused and deterministic. Default is 1.0.
-            default: 1
+            description: The sampling temperature to use, ranging from 0 to 1. A higher value (e.g., 0.7) will make the output more random, while a lower value (e.g., 0.2) will make it more focused and deterministic. Default is 0.0.
+            default: 0
             minimum: 0
             maximum: 1
           top_p:
@@ -442,39 +409,8 @@ components:
             maximum: 2
         required:
         - model
-    ToolDefinition:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - function
-        function:
-          type: object
-          properties:
-            name:
-              type: string
-              description: 'Function name. Must follow the regex: ^[a-zA-Z_][a-zA-Z0-9-_]{2,63}$'
-              pattern: ^[a-zA-Z_][a-zA-Z0-9-_]{2,63}$
-            description:
-              type: string
-              description: Description of what the function does
-            parameters:
-              type: object
-              description: Function parameters as JSON Schema. Must conform to the MFJS (Moonshot Flavored JSON Schema) specification
-              additionalProperties: true
-            strict:
-              type: boolean
-              default: true
-              description: Whether to strictly constrain tool call arguments according to the parameters schema. Defaults to true. When false, only guarantees the output is a valid JSON object without enforcing internal structure.
-          required:
-          - name
-          - parameters
-      required:
-      - type
-      - function
-    KimiK25ChatRequest:
-      title: kimi-k2.5
+    KimiK26ChatRequest:
+      title: kimi-k2.6
       allOf:
       - $ref: '#/components/schemas/ChatRequestBase'
       - type: object
@@ -483,11 +419,11 @@ components:
             type: string
             description: Model ID
             enum:
-            - kimi-k2.5
-            default: kimi-k2.5
+            - kimi-k2.6
+            default: kimi-k2.6
           thinking:
             type: object
-            description: 'Controls whether thinking is enabled for the model. Optional parameter. Default value is {"type": "enabled"}.'
+            description: 'Controls whether thinking is enabled for the kimi-k2.6 model, and whether to fully preserve reasoning_content across multi-turn conversations. Optional parameter. Default value is {"type": "enabled"}.'
             properties:
               type:
                 type: string
@@ -495,6 +431,21 @@ components:
                 - enabled
                 - disabled
                 description: Enable or disable thinking capability
+              keep:
+                type:
+                - string
+                - 'null'
+                enum:
+                - all
+                - null
+                description: 'Controls whether reasoning_content from previous turns is preserved across a multi-turn conversation, i.e. whether to enable Preserved Thinking. Defaults to `null`, meaning historical thinking is NOT preserved.
+
+
+                  - `null` (default) or omitted: The server ignores reasoning_content from historical turns.
+
+                  - `"all"`: Preserves reasoning_content from historical turns and provides it to the model as part of the context, enabling Preserved Thinking. When using this, keep the reasoning_content from every historical assistant message in messages as-is. Recommended to use together with `type: "enabled"`.
+
+                  - Note: This parameter only affects reasoning_content from historical turns; it does not change whether the model produces/outputs thinking within the current turn (that is controlled by `type`). For best practices, see [Preserved Thinking](/guide/use-kimi-k2-thinking-model#preserved-thinking).'
             required:
             - type
             additionalProperties: false
@@ -578,6 +529,55 @@ components:
       required:
       - role
       - content
+    KimiK2ThinkingChatRequest:
+      title: kimi-k2-thinking
+      allOf:
+      - $ref: '#/components/schemas/ChatRequestBase'
+      - type: object
+        properties:
+          model:
+            type: string
+            description: Model ID
+            enum:
+            - kimi-k2-thinking
+            - kimi-k2-thinking-turbo
+            default: kimi-k2-thinking
+          temperature:
+            type: number
+            format: float
+            description: The sampling temperature to use, ranging from 0 to 1. A higher value (e.g., 0.7) will make the output more random, while a lower value (e.g., 0.2) will make it more focused and deterministic. Default is 1.0.
+            default: 1
+            minimum: 0
+            maximum: 1
+          top_p:
+            type: number
+            format: float
+            description: Another sampling method, where the model considers the results of tokens with a cumulative probability mass of top_p. Thus, 0.1 means only considering the top 10% of tokens by probability mass. Generally, we suggest changing either this or the temperature, but not both at the same time. Default is 1.0.
+            default: 1
+            minimum: 0
+            maximum: 1
+          n:
+            type: integer
+            description: The number of results to generate for each input message. Default is 1, must not exceed 5. When the temperature is very close to 0, only 1 result can be returned.
+            default: 1
+            minimum: 1
+            maximum: 5
+          presence_penalty:
+            type: number
+            format: float
+            description: Presence penalty, a number between -2.0 and 2.0. A positive value will penalize new tokens based on whether they appear in the text, increasing the likelihood of the model discussing new topics
+            default: 0
+            minimum: -2
+            maximum: 2
+          frequency_penalty:
+            type: number
+            format: float
+            description: Frequency penalty, a number between -2.0 and 2.0. A positive value will penalize new tokens based on their existing frequency in the text, reducing the likelihood of the model repeating the same phrases verbatim
+            default: 0
+            minimum: -2
+            maximum: 2
+        required:
+        - model
   securitySchemes:
     bearerAuth:
       type: http

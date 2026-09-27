@@ -184,22 +184,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    BatchListResponse:
-      type: object
-      properties:
-        object:
-          type: string
-          example: list
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/BatchObject'
-        has_more:
-          type: boolean
-          description: Whether there are more results
-      required:
-      - object
-      - data
     ErrorResponse:
       type: object
       properties:
@@ -219,6 +203,46 @@ components:
           - message
       required:
       - error
+    BatchCreateRequest:
+      type: object
+      properties:
+        input_file_id:
+          type: string
+          description: ID of the input file, must be a .jsonl file uploaded with purpose="batch"
+        endpoint:
+          type: string
+          description: Request endpoint, currently only /v1/chat/completions is supported
+          enum:
+          - /v1/chat/completions
+        completion_window:
+          type: string
+          description: Time window for task processing, supports formats like 12h, 1d, 3d, minimum 12h, maximum 7d
+        metadata:
+          type: object
+          description: Custom metadata, up to 16 key-value pairs, key max 64 chars, value max 512 chars
+          additionalProperties:
+            type: string
+            maxLength: 512
+      required:
+      - input_file_id
+      - endpoint
+      - completion_window
+    BatchRequestCounts:
+      type: object
+      properties:
+        completed:
+          type: integer
+          description: Number of completed requests
+        failed:
+          type: integer
+          description: Number of failed requests
+        total:
+          type: integer
+          description: Total number of requests
+      required:
+      - completed
+      - failed
+      - total
     BatchObject:
       type: object
       properties:
@@ -316,46 +340,22 @@ components:
       - status
       - created_at
       - request_counts
-    BatchRequestCounts:
+    BatchListResponse:
       type: object
       properties:
-        completed:
-          type: integer
-          description: Number of completed requests
-        failed:
-          type: integer
-          description: Number of failed requests
-        total:
-          type: integer
-          description: Total number of requests
+        object:
+          type: string
+          example: list
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/BatchObject'
+        has_more:
+          type: boolean
+          description: Whether there are more results
       required:
-      - completed
-      - failed
-      - total
-    BatchCreateRequest:
-      type: object
-      properties:
-        input_file_id:
-          type: string
-          description: ID of the input file, must be a .jsonl file uploaded with purpose="batch"
-        endpoint:
-          type: string
-          description: Request endpoint, currently only /v1/chat/completions is supported
-          enum:
-          - /v1/chat/completions
-        completion_window:
-          type: string
-          description: Time window for task processing, supports formats like 12h, 1d, 3d, minimum 12h, maximum 7d
-        metadata:
-          type: object
-          description: Custom metadata, up to 16 key-value pairs, key max 64 chars, value max 512 chars
-          additionalProperties:
-            type: string
-            maxLength: 512
-      required:
-      - input_file_id
-      - endpoint
-      - completion_window
+      - object
+      - data
   securitySchemes:
     bearerAuth:
       type: http
