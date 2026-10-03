@@ -222,6 +222,19 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    FileListResponse:
+      type: object
+      properties:
+        object:
+          type: string
+          example: list
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/FileObject'
+      required:
+      - object
+      - data
     ErrorResponse:
       type: object
       properties:
@@ -241,6 +254,22 @@ components:
           - message
       required:
       - error
+    FileDeleteResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Deleted file identifier
+        object:
+          type: string
+          example: file
+        deleted:
+          type: boolean
+          description: Whether the file was deleted successfully
+      required:
+      - id
+      - object
+      - deleted
     FileObject:
       type: object
       properties:
@@ -283,35 +312,6 @@ components:
       - filename
       - purpose
       - status
-    FileDeleteResponse:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Deleted file identifier
-        object:
-          type: string
-          example: file
-        deleted:
-          type: boolean
-          description: Whether the file was deleted successfully
-      required:
-      - id
-      - object
-      - deleted
-    FileListResponse:
-      type: object
-      properties:
-        object:
-          type: string
-          example: list
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/FileObject'
-      required:
-      - object
-      - data
   securitySchemes:
     bearerAuth:
       type: http
