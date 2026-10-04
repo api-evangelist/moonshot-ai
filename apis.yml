@@ -95,28 +95,6 @@ apis:
     url: https://platform.kimi.ai/docs/pricing/limits
   - type: Playground
     url: https://platform.kimi.ai/playground
-- aid: moonshot-ai:moonshot-ai-chat-api
-  name: Moonshot AI Chat API
-  description: The Chat API from Moonshot AI — 1 operation(s) for chat.
-  humanURL: https://platform.kimi.ai/docs
-  baseURL: https://api.moonshot.ai
-  tags:
-  - Chat
-  properties:
-  - type: OpenAPI
-    url: openapi/moonshot-ai-chat-api-openapi.yml
-  - type: Documentation
-    url: https://platform.kimi.ai/docs
-  - type: AsyncAPI
-    url: asyncapi/moonshot-ai-chat-completions-asyncapi.yml
-  - type: Signup
-    url: https://platform.kimi.ai/console/api-keys
-  - type: Pricing
-    url: https://platform.kimi.ai/docs/pricing/chat
-  - type: RateLimits
-    url: https://platform.kimi.ai/docs/pricing/limits
-  - type: Playground
-    url: https://platform.kimi.ai/playground
 - aid: moonshot-ai:moonshot-ai-files-api
   name: Moonshot AI Files API
   description: The Files API from Moonshot AI — 3 operation(s) for files.
@@ -173,6 +151,28 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/moonshot-ai-utilities-api-openapi.yml
+  - type: Documentation
+    url: https://platform.kimi.ai/docs
+  - type: AsyncAPI
+    url: asyncapi/moonshot-ai-chat-completions-asyncapi.yml
+  - type: Signup
+    url: https://platform.kimi.ai/console/api-keys
+  - type: Pricing
+    url: https://platform.kimi.ai/docs/pricing/chat
+  - type: RateLimits
+    url: https://platform.kimi.ai/docs/pricing/limits
+  - type: Playground
+    url: https://platform.kimi.ai/playground
+- aid: moonshot-ai:moonshot-ai-chat-completions-api
+  name: Moonshot AI Chat Completions API
+  description: The Chat Completions API from Moonshot AI — 1 operation(s) for chat completions.
+  humanURL: https://platform.kimi.ai/docs
+  baseURL: https://api.moonshot.ai
+  tags:
+  - Chat Completions
+  properties:
+  - type: OpenAPI
+    url: openapi/moonshot-ai-chat-completions-api-openapi.yml
   - type: Documentation
     url: https://platform.kimi.ai/docs
   - type: AsyncAPI

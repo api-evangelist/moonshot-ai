@@ -40,25 +40,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            message:
-              type: string
-              description: Error message describing what went wrong
-            type:
-              type: string
-              description: Error type
-            code:
-              type: string
-              description: Error code
-          required:
-          - message
-      required:
-      - error
     BalanceResponse:
       type: object
       properties:
@@ -100,6 +81,25 @@ components:
       - data
       - scode
       - status
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+              description: Error message describing what went wrong
+            type:
+              type: string
+              description: Error type
+            code:
+              type: string
+              description: Error code
+          required:
+          - message
+      required:
+      - error
   securitySchemes:
     bearerAuth:
       type: http
