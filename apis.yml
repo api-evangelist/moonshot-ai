@@ -1,11 +1,14 @@
 aid: moonshot-ai
+
 url: https://raw.githubusercontent.com/api-evangelist/moonshot-ai/refs/heads/main/apis.yml
+
 name: Moonshot AI
+
 kind: company
-description: >-
-  Moonshot AI is a Chinese foundation model company best known for Kimi, an LLM with industry-leading long-context
-  capabilities. The Moonshot platform exposes OpenAI-compatible chat completion, files, batch, models, balance, and
-  token-estimation APIs.
+
+description: Moonshot AI is a Chinese foundation model company best known for Kimi, an LLM with industry-leading long-context capabilities. The
+  Moonshot platform exposes OpenAI-compatible chat completion, files, batch, models, balance, and token-estimation APIs.
+
 deliveryModel:
   model: saas
   open_source: false
@@ -18,6 +21,7 @@ deliveryModel:
   - pricing
   generated: '2026-08-28'
   method: derived
+
 accessModel:
   pricing: enterprise
   onboarding: unknown
@@ -32,24 +36,73 @@ accessModel:
   - security
   generated: '2026-09-03'
   method: derived
+
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/moonshot-ai.png
+
 tags:
-  - Artificial Intelligence
-  - LLM
-  - Inference
-  - Long Context
-  - Kimi
-  - Foundation Models
+- Artificial Intelligence
+- LLM
+- Inference
+- Long Context
+- Kimi
+- Foundation Models
+
 tags_raw:
-  - AI
-  - LLM
-  - Inference
-  - Long Context
-  - Kimi
-  - Foundation Models
+- AI
+- LLM
+- Inference
+- Long Context
+- Kimi
+- Foundation Models
+
 created: '2026-05-08'
+
 modified: '2026-05-30'
+
 specificationVersion: '0.23'
+
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
+
+common:
+- type: Spectral
+  url: rules/moonshot-ai-rules.yml
+- type: Spectral
+  url: rules/moonshot-ai-asyncapi-spectral-rules.yml
+- type: JSONLD
+  url: json-ld/moonshot-ai-context.jsonld
+- type: Vocabulary
+  url: vocabulary/moonshot-ai-vocabulary.yml
+- type: DataModel
+  url: data-model/moonshot-ai-data-model.yml
+- type: ErrorCatalog
+  url: errors/moonshot-ai-problem-types.yml
+- type: Conformance
+  url: conformance/moonshot-ai-conformance.yml
+- type: IntegrationEdges
+  url: integrations/moonshot-ai-integration-edges.yml
+- type: AgenticAccess
+  url: agentic-access/moonshot-ai-agentic-access.yml
+- type: DomainSecurity
+  url: security/moonshot-ai-domain-security.yml
+- type: Authentication
+  url: authentication/moonshot-ai-authentication.yml
+- type: GitHubOrganization
+  url: https://github.com/MoonshotAI
+- type: LinkedIn
+  url: https://www.linkedin.com/company/moonshot-ai-linkedin
+- type: Website
+  url: https://www.moonshot.ai/
+- type: Documentation
+  url: https://platform.kimi.ai/docs
+- type: Plans
+  url: plans/moonshot-ai-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/moonshot-ai-rate-limits.yml
+- type: FinOps
+  url: finops/moonshot-ai-finops.yml
+
 apis:
 - aid: moonshot-ai:moonshot-ai-batch-api
   name: Moonshot AI Batch API
@@ -73,6 +126,12 @@ apis:
     url: https://platform.kimi.ai/docs/pricing/limits
   - type: Playground
     url: https://platform.kimi.ai/playground
+  - type: JSONSchema
+    url: json-schema/moonshot-ai-batch-object-schema.json
+  - type: JSONSchema
+    url: json-schema/moonshot-ai-batch-create-request-schema.json
+  - type: JSONSchema
+    url: json-schema/moonshot-ai-batch-list-response-schema.json
 - aid: moonshot-ai:moonshot-ai-billing-api
   name: Moonshot AI Billing API
   description: The Billing API from Moonshot AI — 1 operation(s) for billing.
@@ -95,6 +154,8 @@ apis:
     url: https://platform.kimi.ai/docs/pricing/limits
   - type: Playground
     url: https://platform.kimi.ai/playground
+  - type: JSONSchema
+    url: json-schema/moonshot-ai-balance-response-schema.json
 - aid: moonshot-ai:moonshot-ai-files-api
   name: Moonshot AI Files API
   description: The Files API from Moonshot AI — 3 operation(s) for files.
@@ -119,6 +180,12 @@ apis:
     url: https://platform.kimi.ai/docs/pricing/limits
   - type: Playground
     url: https://platform.kimi.ai/playground
+  - type: JSONSchema
+    url: json-schema/moonshot-ai-file-object-schema.json
+  - type: JSONSchema
+    url: json-schema/moonshot-ai-file-delete-response-schema.json
+  - type: JSONSchema
+    url: json-schema/moonshot-ai-file-list-response-schema.json
 - aid: moonshot-ai:moonshot-ai-models-api
   name: Moonshot AI Models API
   description: The Models API from Moonshot AI — 1 operation(s) for models.
@@ -163,6 +230,10 @@ apis:
     url: https://platform.kimi.ai/docs/pricing/limits
   - type: Playground
     url: https://platform.kimi.ai/playground
+  - type: JSONSchema
+    url: json-schema/moonshot-ai-estimate-token-request-schema.json
+  - type: JSONSchema
+    url: json-schema/moonshot-ai-estimate-token-response-schema.json
 - aid: moonshot-ai:moonshot-ai-chat-completions-api
   name: Moonshot AI Chat Completions API
   description: The Chat Completions API from Moonshot AI — 1 operation(s) for chat completions.
@@ -185,27 +256,80 @@ apis:
     url: https://platform.kimi.ai/docs/pricing/limits
   - type: Playground
     url: https://platform.kimi.ai/playground
-common:
-  - type: AgenticAccess
-    url: agentic-access/moonshot-ai-agentic-access.yml
-  - type: DomainSecurity
-    url: security/moonshot-ai-domain-security.yml
-  - type: Authentication
-    url: authentication/moonshot-ai-authentication.yml
-  - type: GitHubOrganization
-    url: https://github.com/MoonshotAI
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/moonshot-ai-linkedin
-  - type: Website
-    url: https://www.moonshot.ai/
+  - type: JSONSchema
+    url: json-schema/moonshot-ai-moonshot-v1-chat-request-schema.json
+  - type: JSONSchema
+    url: json-schema/moonshot-ai-kimi-k2-chat-request-schema.json
+  - type: JSONSchema
+    url: json-schema/moonshot-ai-kimi-k2-thinking-chat-request-schema.json
+  - type: JSONSchema
+    url: json-schema/moonshot-ai-kimi-k26-chat-request-schema.json
+  - type: JSONSchema
+    url: json-schema/moonshot-ai-chat-completion-response-schema.json
+  - type: JSONSchema
+    url: json-schema/moonshot-ai-kimi-k25-chat-request-schema.json
+- aid: moonshot-ai:moonshot-ai-embeddings-api
+  name: Kimi Embeddings API
+  description: OpenAI-compatible embeddings endpoint that returns vector representations of input text for semantic search, clustering, and retrieval-augmented
+    generation workflows.
+  humanURL: https://platform.moonshot.cn/docs
+  baseURL: https://api.moonshot.cn/v1/embeddings
+  tags:
+  - Embeddings
+  - Vectors
+  properties:
   - type: Documentation
-    url: https://platform.kimi.ai/docs
-  - type: Plans
-    url: plans/moonshot-ai-plans-pricing.yml
-  - type: RateLimits
-    url: rate-limits/moonshot-ai-rate-limits.yml
-  - type: FinOps
-    url: finops/moonshot-ai-finops.yml
-maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+    url: https://platform.moonshot.cn/docs
+  x-moved-from: kimi-moonshot:embeddings (consolidated into moonshot-ai 2026-10-13, approved by Kin Lane)
+- aid: moonshot-ai:moonshot-ai-fine-tuning-api
+  name: Kimi Fine-Tuning API
+  description: Fine-tuning jobs endpoint for customizing Moonshot base models on customer-supplied training data. Mirrors the OpenAI fine-tuning
+    surface.
+  humanURL: https://platform.moonshot.cn/docs
+  baseURL: https://api.moonshot.cn/v1/fine_tuning
+  tags:
+  - Fine-Tuning
+  - Training
+  properties:
+  - type: Documentation
+    url: https://platform.moonshot.cn/docs
+  x-moved-from: kimi-moonshot:fine-tuning (consolidated into moonshot-ai 2026-10-13, approved by Kin Lane)
+- aid: moonshot-ai:moonshot-ai-tokenizer-api
+  name: Kimi Tokenizer API
+  description: Helper endpoint exposed by the Moonshot platform for counting tokens against a given model's tokenizer prior to submission, useful
+    for managing long-context budgets.
+  humanURL: https://platform.moonshot.cn/docs
+  baseURL: https://api.moonshot.cn/v1/tokenizers
+  tags:
+  - Tokenizer
+  - Utilities
+  properties:
+  - type: Documentation
+    url: https://platform.moonshot.cn/docs
+  x-moved-from: kimi-moonshot:tokenizer (consolidated into moonshot-ai 2026-10-13, approved by Kin Lane)
+- aid: moonshot-ai:moonshot-ai-kimi-assistant
+  name: Kimi Assistant (kimi.com)
+  description: Consumer-facing AI assistant at kimi.com (also kimi.ai) powered by the Kimi models. Supports long-document upload, web search grounding,
+    and tool use through a chat UI.
+  humanURL: https://kimi.com/
+  baseURL: https://kimi.com/
+  tags:
+  - Assistant
+  - Consumer
+  properties:
+  - type: Website
+    url: https://kimi.com/
+  x-moved-from: kimi-moonshot:assistant (consolidated into moonshot-ai 2026-10-13, approved by Kin Lane)
+- aid: moonshot-ai:moonshot-ai-open-weights
+  name: Moonshot Open-Weights Releases
+  description: Open-weight Kimi model releases (for example prior Kimi K1 / K2 checkpoints) published under the MoonshotAI GitHub organization
+    for research and self-hosted use.
+  humanURL: https://github.com/MoonshotAI
+  baseURL: https://github.com/MoonshotAI
+  tags:
+  - Open Weights
+  - Research
+  properties:
+  - type: Repository
+    url: https://github.com/MoonshotAI
+  x-moved-from: kimi-moonshot:open-weights (consolidated into moonshot-ai 2026-10-13, approved by Kin Lane)

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/moonshot-ai/main/json-schema/moonshot-ai-estimate-token-response-schema.json",
+  "title": "EstimateTokenResponse",
+  "x-generated": "2026-10-13",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/moonshot-ai-utilities-api-openapi.yml#/components/schemas/EstimateTokenResponse",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "object",
+      "properties": {
+        "total_tokens": {
+          "type": "integer",
+          "description": "Estimated total number of tokens"
+        }
+      },
+      "required": [
+        "total_tokens"
+      ]
+    }
+  },
+  "required": [
+    "data"
+  ]
+}

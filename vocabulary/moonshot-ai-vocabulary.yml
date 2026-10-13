@@ -1,0 +1,124 @@
+generated: '2026-10-13'
+method: derived
+generator: derive-vocabulary.py
+source:
+- openapi/moonshot-ai-batch-api-openapi.yml
+- openapi/moonshot-ai-billing-api-openapi.yml
+- openapi/moonshot-ai-chat-completions-api-openapi.yml
+- openapi/moonshot-ai-files-api-openapi.yml
+- openapi/moonshot-ai-models-api-openapi.yml
+vocabulary:
+  name: Moonshot AI Domain Vocabulary
+  description: 'Terms declared by Moonshot AI''s own API contract: its resource groups, objects and enumerations, with the contract''s definitions.
+    Derived, not authored.'
+  version: '2026-10-13'
+  terms:
+  - term: BatchCreateRequest
+    definition: 'Object declared by the contract with fields: input_file_id, endpoint, completion_window, metadata.'
+    tags:
+    - Object
+    source: openapi/moonshot-ai-batch-api-openapi.yml#/components/schemas/BatchCreateRequest
+  - term: BatchListResponse
+    definition: 'Object declared by the contract with fields: object, data, has_more.'
+    tags:
+    - Object
+    source: openapi/moonshot-ai-batch-api-openapi.yml#/components/schemas/BatchListResponse
+  - term: BatchRequestCounts
+    definition: 'Object declared by the contract with fields: completed, failed, total.'
+    tags:
+    - Object
+    source: openapi/moonshot-ai-batch-api-openapi.yml#/components/schemas/BatchRequestCounts
+  - term: BatchObject
+    definition: 'Object declared by the contract with fields: id, object, endpoint, input_file_id, completion_window, status, output_file_id,
+      error_file_id, created_at, in_progress_at, expires_at, finalizing_at. (6 more)'
+    tags:
+    - Object
+    source: openapi/moonshot-ai-batch-api-openapi.yml#/components/schemas/BatchObject
+  - term: ErrorResponse
+    definition: 'Object declared by the contract with fields: error.'
+    tags:
+    - Object
+    source: openapi/moonshot-ai-batch-api-openapi.yml#/components/schemas/ErrorResponse
+  - term: BalanceResponse
+    definition: 'Object declared by the contract with fields: code, data, scode, status.'
+    tags:
+    - Object
+    source: openapi/moonshot-ai-billing-api-openapi.yml#/components/schemas/BalanceResponse
+  - term: Message
+    definition: 'Object declared by the contract with fields: role, content, name, partial.'
+    tags:
+    - Object
+    source: openapi/moonshot-ai-chat-completions-api-openapi.yml#/components/schemas/Message
+  - term: ChatRequestBase
+    definition: 'Object declared by the contract with fields: messages, max_tokens, max_completion_tokens, response_format, stop, stream, stream_options,
+      tools, prompt_cache_key, safety_identifier.'
+    tags:
+    - Object
+    source: openapi/moonshot-ai-chat-completions-api-openapi.yml#/components/schemas/ChatRequestBase
+  - term: ToolDefinition
+    definition: 'Object declared by the contract with fields: type, function.'
+    tags:
+    - Object
+    source: openapi/moonshot-ai-chat-completions-api-openapi.yml#/components/schemas/ToolDefinition
+  - term: ChatCompletionResponse
+    definition: 'Object declared by the contract with fields: id, object, created, model, choices, usage.'
+    tags:
+    - Object
+    source: openapi/moonshot-ai-chat-completions-api-openapi.yml#/components/schemas/ChatCompletionResponse
+  - term: FileObject
+    definition: 'Object declared by the contract with fields: id, object, bytes, created_at, filename, purpose, status, status_details.'
+    tags:
+    - Object
+    source: openapi/moonshot-ai-files-api-openapi.yml#/components/schemas/FileObject
+  - term: FileDeleteResponse
+    definition: 'Object declared by the contract with fields: id, object, deleted.'
+    tags:
+    - Object
+    source: openapi/moonshot-ai-files-api-openapi.yml#/components/schemas/FileDeleteResponse
+  - term: FileListResponse
+    definition: 'Object declared by the contract with fields: object, data.'
+    tags:
+    - Object
+    source: openapi/moonshot-ai-files-api-openapi.yml#/components/schemas/FileListResponse
+  - term: EstimateTokenRequest
+    definition: 'Object declared by the contract with fields: model, messages.'
+    tags:
+    - Object
+    source: openapi/moonshot-ai-utilities-api-openapi.yml#/components/schemas/EstimateTokenRequest
+  - term: EstimateTokenResponse
+    definition: 'Object declared by the contract with fields: data.'
+    tags:
+    - Object
+    source: openapi/moonshot-ai-utilities-api-openapi.yml#/components/schemas/EstimateTokenResponse
+  - term: Batch
+    definition: 'Resource group in the contract; its operation POST /v1/batches: Create a batch task.'
+    tags:
+    - Resource Group
+    source: openapi/moonshot-ai-batch-api-openapi.yml
+  - term: Billing
+    definition: 'Resource group in the contract; its operation GET /v1/users/me/balance: REST API to check your available, voucher, and cash balances
+      on Kimi OpenPlatform.'
+    tags:
+    - Resource Group
+    source: openapi/moonshot-ai-billing-api-openapi.yml
+  - term: Chat Completions
+    definition: 'Resource group in the contract; its operation POST /v1/chat/completions: Creates a completion for the chat message.'
+    tags:
+    - Resource Group
+    source: openapi/moonshot-ai-chat-completions-api-openapi.yml
+  - term: Files
+    definition: 'Resource group in the contract; its operation POST /v1/files: Uploads a file for extraction, image understanding, or video understanding.'
+    tags:
+    - Resource Group
+    source: openapi/moonshot-ai-files-api-openapi.yml
+  - term: Models
+    definition: 'Resource group in the contract; its operation GET /v1/models: List all currently available models.'
+    tags:
+    - Resource Group
+    source: openapi/moonshot-ai-models-api-openapi.yml
+  - term: Utilities
+    definition: 'Resource group in the contract; its operation POST /v1/tokenizers/estimate-token-count: Estimates the number of tokens that would
+      be used for a given set of messages and model.'
+    tags:
+    - Resource Group
+    source: openapi/moonshot-ai-utilities-api-openapi.yml

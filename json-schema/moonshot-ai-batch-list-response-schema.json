@@ -1,0 +1,182 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/moonshot-ai/main/json-schema/moonshot-ai-batch-list-response-schema.json",
+  "title": "BatchListResponse",
+  "x-generated": "2026-10-13",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/moonshot-ai-batch-api-openapi.yml#/components/schemas/BatchListResponse",
+  "type": "object",
+  "properties": {
+    "object": {
+      "type": "string"
+    },
+    "data": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/BatchObject"
+      }
+    },
+    "has_more": {
+      "type": "boolean",
+      "description": "Whether there are more results"
+    }
+  },
+  "required": [
+    "object",
+    "data"
+  ],
+  "$defs": {
+    "BatchObject": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the batch task"
+        },
+        "object": {
+          "type": "string",
+          "description": "Object type, always batch"
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "Request endpoint"
+        },
+        "input_file_id": {
+          "type": "string",
+          "description": "Input file ID"
+        },
+        "completion_window": {
+          "type": "string",
+          "description": "Processing time window"
+        },
+        "status": {
+          "type": "string",
+          "description": "Current status: validating, failed, in_progress, finalizing, completed, expired, cancelling, cancelled",
+          "enum": [
+            "validating",
+            "failed",
+            "in_progress",
+            "finalizing",
+            "completed",
+            "expired",
+            "cancelling",
+            "cancelled"
+          ]
+        },
+        "output_file_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Output file ID for successful results"
+        },
+        "error_file_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Error file ID for failed results"
+        },
+        "created_at": {
+          "type": "integer",
+          "description": "Creation timestamp (Unix)"
+        },
+        "in_progress_at": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Execution start timestamp (Unix)"
+        },
+        "expires_at": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Expiration timestamp (Unix)"
+        },
+        "finalizing_at": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Result preparation start timestamp (Unix)"
+        },
+        "completed_at": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Completion timestamp (Unix)"
+        },
+        "failed_at": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Validation failure timestamp (Unix)"
+        },
+        "cancelling_at": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Cancellation request timestamp (Unix)"
+        },
+        "cancelled_at": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Cancellation completion timestamp (Unix)"
+        },
+        "request_counts": {
+          "$ref": "#/$defs/BatchRequestCounts"
+        },
+        "metadata": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "description": "Custom metadata",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "object",
+        "endpoint",
+        "input_file_id",
+        "completion_window",
+        "status",
+        "created_at",
+        "request_counts"
+      ]
+    },
+    "BatchRequestCounts": {
+      "type": "object",
+      "properties": {
+        "completed": {
+          "type": "integer",
+          "description": "Number of completed requests"
+        },
+        "failed": {
+          "type": "integer",
+          "description": "Number of failed requests"
+        },
+        "total": {
+          "type": "integer",
+          "description": "Total number of requests"
+        }
+      },
+      "required": [
+        "completed",
+        "failed",
+        "total"
+      ]
+    }
+  }
+}

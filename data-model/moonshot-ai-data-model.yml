@@ -1,0 +1,81 @@
+generated: '2026-10-13'
+method: derived
+generator: derive-data-model.py
+source:
+- openapi/moonshot-ai-batch-api-openapi.yml
+- openapi/moonshot-ai-billing-api-openapi.yml
+- openapi/moonshot-ai-chat-completions-api-openapi.yml
+- openapi/moonshot-ai-files-api-openapi.yml
+- openapi/moonshot-ai-models-api-openapi.yml
+- openapi/moonshot-ai-utilities-api-openapi.yml
+notation: has_one = property $ref; has_many = array of $ref; belongs_to = <entity>_id field
+summary:
+  entities: 20
+  entities_in_spec: 20
+  relationships: 6
+entities:
+- name: BalanceResponse
+  fields: 4
+- name: BatchCreateRequest
+  fields: 4
+- name: BatchListResponse
+  fields: 3
+- name: BatchObject
+  fields: 18
+- name: BatchRequestCounts
+  fields: 3
+- name: ChatCompletionResponse
+  fields: 6
+- name: ChatRequestBase
+  fields: 10
+- name: ErrorResponse
+  fields: 1
+- name: EstimateTokenRequest
+  fields: 2
+- name: EstimateTokenResponse
+  fields: 1
+- name: FileDeleteResponse
+  fields: 3
+- name: FileListResponse
+  fields: 2
+- name: FileObject
+  fields: 8
+- name: KimiK25ChatRequest
+  fields: 0
+- name: KimiK26ChatRequest
+  fields: 0
+- name: KimiK2ChatRequest
+  fields: 0
+- name: KimiK2ThinkingChatRequest
+  fields: 0
+- name: Message
+  fields: 4
+- name: MoonshotV1ChatRequest
+  fields: 0
+- name: ToolDefinition
+  fields: 2
+relationships:
+- from: BatchListResponse
+  to: BatchObject
+  type: has_many
+  via: data
+- from: BatchObject
+  to: BatchRequestCounts
+  type: has_one
+  via: request_counts
+- from: ChatRequestBase
+  to: Message
+  type: has_many
+  via: messages
+- from: ChatRequestBase
+  to: ToolDefinition
+  type: has_many
+  via: tools
+- from: FileListResponse
+  to: FileObject
+  type: has_many
+  via: data
+- from: EstimateTokenRequest
+  to: Message
+  type: has_many
+  via: messages

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/moonshot-ai/main/json-schema/moonshot-ai-batch-create-request-schema.json",
+  "title": "BatchCreateRequest",
+  "x-generated": "2026-10-13",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/moonshot-ai-batch-api-openapi.yml#/components/schemas/BatchCreateRequest",
+  "type": "object",
+  "properties": {
+    "input_file_id": {
+      "type": "string",
+      "description": "ID of the input file, must be a .jsonl file uploaded with purpose=\"batch\""
+    },
+    "endpoint": {
+      "type": "string",
+      "description": "Request endpoint, currently only /v1/chat/completions is supported",
+      "enum": [
+        "/v1/chat/completions"
+      ]
+    },
+    "completion_window": {
+      "type": "string",
+      "description": "Time window for task processing, supports formats like 12h, 1d, 3d, minimum 12h, maximum 7d"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Custom metadata, up to 16 key-value pairs, key max 64 chars, value max 512 chars",
+      "additionalProperties": {
+        "type": "string",
+        "maxLength": 512
+      }
+    }
+  },
+  "required": [
+    "input_file_id",
+    "endpoint",
+    "completion_window"
+  ]
+}

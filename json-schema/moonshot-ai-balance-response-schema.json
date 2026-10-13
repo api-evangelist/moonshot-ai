@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/moonshot-ai/main/json-schema/moonshot-ai-balance-response-schema.json",
+  "title": "BalanceResponse",
+  "x-generated": "2026-10-13",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/moonshot-ai-billing-api-openapi.yml#/components/schemas/BalanceResponse",
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "integer",
+      "description": "Response code. 0 indicates success."
+    },
+    "data": {
+      "type": "object",
+      "properties": {
+        "available_balance": {
+          "type": "number",
+          "format": "float",
+          "description": "The available balance (unit: USD), including cash balance and voucher balance. When it is less than or equal to 0, the user cannot call the inference API"
+        },
+        "voucher_balance": {
+          "type": "number",
+          "format": "float",
+          "description": "The voucher balance (unit: USD), which cannot be negative"
+        },
+        "cash_balance": {
+          "type": "number",
+          "format": "float",
+          "description": "The cash balance (unit: USD), which can be negative, indicating that the user owes money. When it is negative, available_balance is equal to the value of voucher_balance"
+        }
+      },
+      "required": [
+        "available_balance",
+        "voucher_balance",
+        "cash_balance"
+      ]
+    },
+    "scode": {
+      "type": "string",
+      "description": "Status code"
+    },
+    "status": {
+      "type": "boolean",
+      "description": "Request status"
+    }
+  },
+  "required": [
+    "code",
+    "data",
+    "scode",
+    "status"
+  ]
+}

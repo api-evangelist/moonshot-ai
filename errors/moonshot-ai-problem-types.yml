@@ -1,0 +1,46 @@
+generated: '2026-10-13'
+method: derived
+generator: derive-problem-types.py
+source:
+- openapi/moonshot-ai-batch-api-openapi.yml
+- openapi/moonshot-ai-billing-api-openapi.yml
+- openapi/moonshot-ai-chat-completions-api-openapi.yml
+- openapi/moonshot-ai-files-api-openapi.yml
+- openapi/moonshot-ai-models-api-openapi.yml
+- openapi/moonshot-ai-utilities-api-openapi.yml
+format: custom
+envelope:
+  media_type: application/json
+  schema: ErrorResponse
+coverage:
+  operations: 13
+  statuses_declared: 4
+problems:
+- status: 400
+  title: Bad Request
+  description: Bad request - Invalid parameters
+  operations: 5
+  media_types:
+  - application/json
+  schema: ErrorResponse
+- status: 401
+  title: Unauthorized
+  description: Unauthorized - Invalid or missing API key
+  operations: 13
+  media_types:
+  - application/json
+  schema: ErrorResponse
+- status: 404
+  title: Not Found
+  description: File not found
+  operations: 5
+  media_types:
+  - application/json
+  schema: ErrorResponse
+- status: 500
+  title: Internal Server Error
+  description: Server error
+  operations: 12
+  media_types:
+  - application/json
+  schema: ErrorResponse

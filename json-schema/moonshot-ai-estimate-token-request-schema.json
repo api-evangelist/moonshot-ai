@@ -1,0 +1,174 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/moonshot-ai/main/json-schema/moonshot-ai-estimate-token-request-schema.json",
+  "title": "EstimateTokenRequest",
+  "x-generated": "2026-10-13",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/moonshot-ai-utilities-api-openapi.yml#/components/schemas/EstimateTokenRequest",
+  "type": "object",
+  "properties": {
+    "model": {
+      "type": "string",
+      "description": "Model ID",
+      "default": "kimi-k2.5",
+      "enum": [
+        "kimi-k2.6",
+        "kimi-k2.5",
+        "kimi-k2-0905-preview",
+        "kimi-k2-0711-preview",
+        "kimi-k2-turbo-preview",
+        "moonshot-v1-8k",
+        "moonshot-v1-32k",
+        "moonshot-v1-128k",
+        "moonshot-v1-auto",
+        "moonshot-v1-8k-vision-preview",
+        "moonshot-v1-32k-vision-preview",
+        "moonshot-v1-128k-vision-preview"
+      ]
+    },
+    "messages": {
+      "type": "array",
+      "description": "A list of messages in the conversation so far. Each element has the format {\"role\": \"user\", \"content\": \"Hello\"}. role supports system, user, or assistant. content must not be empty",
+      "items": {
+        "$ref": "#/$defs/Message"
+      }
+    }
+  },
+  "required": [
+    "model",
+    "messages"
+  ],
+  "$defs": {
+    "Message": {
+      "type": "object",
+      "properties": {
+        "role": {
+          "type": "string",
+          "enum": [
+            "system",
+            "user",
+            "assistant"
+          ],
+          "description": "The role of the message sender"
+        },
+        "content": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  {
+                    "title": "text",
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "text"
+                        ]
+                      },
+                      "text": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "text"
+                    ]
+                  },
+                  {
+                    "title": "image_url",
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "image_url"
+                        ]
+                      },
+                      "image_url": {
+                        "oneOf": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "url": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "url"
+                            ]
+                          },
+                          {
+                            "type": "string"
+                          }
+                        ]
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "image_url"
+                    ]
+                  },
+                  {
+                    "title": "video_url",
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "video_url"
+                        ]
+                      },
+                      "video_url": {
+                        "oneOf": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "url": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "url"
+                            ]
+                          },
+                          {
+                            "type": "string"
+                          }
+                        ]
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "video_url"
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "description": "The content of the message. Can be a plain text string, or an array of objects with text/image_url/video_url types (for multimodal input)"
+        },
+        "name": {
+          "type": "string",
+          "default": null,
+          "description": "Optional name for the message sender"
+        },
+        "partial": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable Partial Mode by setting this to true in the last assistant message"
+        }
+      },
+      "required": [
+        "role",
+        "content"
+      ]
+    }
+  }
+}

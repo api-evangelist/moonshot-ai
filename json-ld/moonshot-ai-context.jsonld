@@ -1,0 +1,231 @@
+{
+  "@context": {
+    "@vocab": "https://moonshot.ai/schema#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "moonshot": "https://moonshot.ai/schema#",
+    "BatchCreateRequest": "moonshot:BatchCreateRequest",
+    "input_file_id": {
+      "@id": "moonshot:input_file_id",
+      "@type": "xsd:string"
+    },
+    "endpoint": {
+      "@id": "moonshot:endpoint",
+      "@type": "xsd:string"
+    },
+    "completion_window": {
+      "@id": "moonshot:completion_window",
+      "@type": "xsd:string"
+    },
+    "metadata": {
+      "@id": "moonshot:metadata"
+    },
+    "BatchListResponse": "moonshot:BatchListResponse",
+    "object": {
+      "@id": "moonshot:object",
+      "@type": "xsd:string"
+    },
+    "data": {
+      "@id": "moonshot:data",
+      "@container": "@list"
+    },
+    "has_more": {
+      "@id": "moonshot:has_more",
+      "@type": "xsd:boolean"
+    },
+    "BatchRequestCounts": "moonshot:BatchRequestCounts",
+    "completed": {
+      "@id": "moonshot:completed",
+      "@type": "xsd:integer"
+    },
+    "failed": {
+      "@id": "moonshot:failed",
+      "@type": "xsd:integer"
+    },
+    "total": {
+      "@id": "moonshot:total",
+      "@type": "xsd:integer"
+    },
+    "BatchObject": "moonshot:BatchObject",
+    "id": {
+      "@id": "moonshot:id",
+      "@type": "xsd:string"
+    },
+    "status": {
+      "@id": "moonshot:status",
+      "@type": "xsd:string"
+    },
+    "output_file_id": {
+      "@id": "moonshot:output_file_id",
+      "@type": "xsd:string"
+    },
+    "error_file_id": {
+      "@id": "moonshot:error_file_id",
+      "@type": "xsd:string"
+    },
+    "created_at": {
+      "@id": "moonshot:created_at",
+      "@type": "xsd:integer"
+    },
+    "in_progress_at": {
+      "@id": "moonshot:in_progress_at",
+      "@type": "xsd:integer"
+    },
+    "expires_at": {
+      "@id": "moonshot:expires_at",
+      "@type": "xsd:integer"
+    },
+    "finalizing_at": {
+      "@id": "moonshot:finalizing_at",
+      "@type": "xsd:integer"
+    },
+    "completed_at": {
+      "@id": "moonshot:completed_at",
+      "@type": "xsd:integer"
+    },
+    "failed_at": {
+      "@id": "moonshot:failed_at",
+      "@type": "xsd:integer"
+    },
+    "cancelling_at": {
+      "@id": "moonshot:cancelling_at",
+      "@type": "xsd:integer"
+    },
+    "cancelled_at": {
+      "@id": "moonshot:cancelled_at",
+      "@type": "xsd:integer"
+    },
+    "request_counts": {
+      "@id": "moonshot:request_counts",
+      "@type": "@id"
+    },
+    "ErrorResponse": "moonshot:ErrorResponse",
+    "error": {
+      "@id": "moonshot:error"
+    },
+    "BalanceResponse": "moonshot:BalanceResponse",
+    "code": {
+      "@id": "moonshot:code",
+      "@type": "xsd:integer"
+    },
+    "scode": {
+      "@id": "moonshot:scode",
+      "@type": "xsd:string"
+    },
+    "Message": "moonshot:Message",
+    "role": {
+      "@id": "moonshot:role",
+      "@type": "xsd:string"
+    },
+    "content": {
+      "@id": "moonshot:content"
+    },
+    "name": {
+      "@id": "moonshot:name",
+      "@type": "xsd:string"
+    },
+    "partial": {
+      "@id": "moonshot:partial",
+      "@type": "xsd:boolean"
+    },
+    "ChatRequestBase": "moonshot:ChatRequestBase",
+    "messages": {
+      "@id": "moonshot:messages",
+      "@container": "@list"
+    },
+    "max_tokens": {
+      "@id": "moonshot:max_tokens",
+      "@type": "xsd:integer"
+    },
+    "max_completion_tokens": {
+      "@id": "moonshot:max_completion_tokens",
+      "@type": "xsd:integer"
+    },
+    "response_format": {
+      "@id": "moonshot:response_format"
+    },
+    "stop": {
+      "@id": "moonshot:stop"
+    },
+    "stream": {
+      "@id": "moonshot:stream",
+      "@type": "xsd:boolean"
+    },
+    "stream_options": {
+      "@id": "moonshot:stream_options"
+    },
+    "tools": {
+      "@id": "moonshot:tools",
+      "@container": "@list"
+    },
+    "prompt_cache_key": {
+      "@id": "moonshot:prompt_cache_key",
+      "@type": "xsd:string"
+    },
+    "safety_identifier": {
+      "@id": "moonshot:safety_identifier",
+      "@type": "xsd:string"
+    },
+    "ToolDefinition": "moonshot:ToolDefinition",
+    "type": {
+      "@id": "moonshot:type",
+      "@type": "xsd:string"
+    },
+    "function": {
+      "@id": "moonshot:function"
+    },
+    "ChatCompletionResponse": "moonshot:ChatCompletionResponse",
+    "created": {
+      "@id": "moonshot:created",
+      "@type": "xsd:integer"
+    },
+    "model": {
+      "@id": "moonshot:model",
+      "@type": "xsd:string"
+    },
+    "choices": {
+      "@id": "moonshot:choices",
+      "@container": "@list"
+    },
+    "usage": {
+      "@id": "moonshot:usage"
+    },
+    "FileObject": "moonshot:FileObject",
+    "bytes": {
+      "@id": "moonshot:bytes",
+      "@type": "xsd:integer"
+    },
+    "filename": {
+      "@id": "moonshot:filename",
+      "@type": "xsd:string"
+    },
+    "purpose": {
+      "@id": "moonshot:purpose",
+      "@type": "xsd:string"
+    },
+    "status_details": {
+      "@id": "moonshot:status_details",
+      "@type": "xsd:string"
+    },
+    "FileDeleteResponse": "moonshot:FileDeleteResponse",
+    "deleted": {
+      "@id": "moonshot:deleted",
+      "@type": "xsd:boolean"
+    },
+    "FileListResponse": "moonshot:FileListResponse",
+    "EstimateTokenRequest": "moonshot:EstimateTokenRequest",
+    "EstimateTokenResponse": "moonshot:EstimateTokenResponse"
+  },
+  "@type": "schema:Dataset",
+  "schema:name": "Moonshot AI API JSON-LD context",
+  "schema:description": "A JSON-LD @context for the objects Moonshot AI's own API contract declares: one class per component schema, one property per declared field, typed from the contract. Derived by script (derive-json-ld.py, 2026-10-13) from openapi/moonshot-ai-batch-api-openapi.yml, openapi/moonshot-ai-billing-api-openapi.yml, openapi/moonshot-ai-chat-completions-api-openapi.yml.",
+  "dcterms:created": "2026-10-13",
+  "dcterms:source": [
+    "openapi/moonshot-ai-batch-api-openapi.yml",
+    "openapi/moonshot-ai-billing-api-openapi.yml",
+    "openapi/moonshot-ai-chat-completions-api-openapi.yml",
+    "openapi/moonshot-ai-files-api-openapi.yml",
+    "openapi/moonshot-ai-models-api-openapi.yml"
+  ]
+}

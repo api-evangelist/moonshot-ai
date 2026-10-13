@@ -1,0 +1,83 @@
+generated: '2026-10-13'
+method: derived
+generator: derive-mcp-candidate.py
+source:
+- openapi/moonshot-ai-batch-api-openapi.yml
+- openapi/moonshot-ai-billing-api-openapi.yml
+- openapi/moonshot-ai-chat-completions-api-openapi.yml
+- openapi/moonshot-ai-files-api-openapi.yml
+- openapi/moonshot-ai-models-api-openapi.yml
+- openapi/moonshot-ai-utilities-api-openapi.yml
+status: candidate
+deployment:
+  mode: none
+  auth: unknown
+  verified: derived
+note: No MCP server was found. No probe result in the dossier. Candidate tools below are derived from the 13 operation(s) in the provider's own
+  OpenAPI (13 listed); they describe what a server WOULD expose, not one that exists.
+tools:
+- name: post_v1_batches
+  operationId: postV1Batches
+  method: POST
+  path: /v1/batches
+  description: Create Batch
+- name: get_v1_users_me_balance
+  operationId: getV1UsersMeBalance
+  method: GET
+  path: /v1/users/me/balance
+  description: Check Balance
+- name: post_v1_chat_completions
+  operationId: postV1ChatCompletions
+  method: POST
+  path: /v1/chat/completions
+  description: Create Chat Completion
+- name: post_v1_files
+  operationId: postV1Files
+  method: POST
+  path: /v1/files
+  description: Upload File
+- name: get_v1_models
+  operationId: getV1Models
+  method: GET
+  path: /v1/models
+  description: List Models
+- name: post_v1_tokenizers_estimate_token_count
+  operationId: postV1TokenizersEstimateTokenCount
+  method: POST
+  path: /v1/tokenizers/estimate-token-count
+  description: Estimate Token Count
+- name: get_v1_batches
+  operationId: getV1Batches
+  method: GET
+  path: /v1/batches
+  description: List Batches
+- name: get_v1_files
+  operationId: getV1Files
+  method: GET
+  path: /v1/files
+  description: List Files
+- name: get_v1_batches_by_batch_id
+  operationId: getV1BatchesByBatchId
+  method: GET
+  path: /v1/batches/{batch_id}
+  description: Retrieve Batch
+- name: get_v1_files_by_file_id
+  operationId: getV1FilesByFileId
+  method: GET
+  path: /v1/files/{file_id}
+  description: Get File Information
+- name: post_v1_batches_by_batch_id_cancel
+  operationId: postV1BatchesByBatchIdCancel
+  method: POST
+  path: /v1/batches/{batch_id}/cancel
+  description: Cancel Batch
+- name: delete_v1_files_by_file_id
+  operationId: deleteV1FilesByFileId
+  method: DELETE
+  path: /v1/files/{file_id}
+  description: Delete File
+- name: get_v1_files_by_file_id_content
+  operationId: getV1FilesByFileIdContent
+  method: GET
+  path: /v1/files/{file_id}/content
+  description: Get File Content
