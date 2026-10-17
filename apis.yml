@@ -234,6 +234,79 @@ apis:
     url: json-schema/moonshot-ai-estimate-token-request-schema.json
   - type: JSONSchema
     url: json-schema/moonshot-ai-estimate-token-response-schema.json
+- aid: moonshot-ai:moonshot-ai-embeddings-api
+  name: Kimi Embeddings API
+  description: >-
+    OpenAI-compatible embeddings endpoint that returns vector representations of input text for semantic
+    search, clustering, and retrieval-augmented generation workflows.
+  humanURL: https://platform.moonshot.cn/docs
+  baseURL: https://api.moonshot.cn/v1/embeddings
+  tags:
+  - Embeddings
+  - Vectors
+  properties:
+  - type: Documentation
+    url: https://platform.moonshot.cn/docs
+  x-moved-from: >-
+    kimi-moonshot:embeddings (consolidated into moonshot-ai 2026-10-13, approved by Kin Lane)
+- aid: moonshot-ai:moonshot-ai-fine-tuning-api
+  name: Kimi Fine-Tuning API
+  description: >-
+    Fine-tuning jobs endpoint for customizing Moonshot base models on customer-supplied training data.
+    Mirrors the OpenAI fine-tuning surface.
+  humanURL: https://platform.moonshot.cn/docs
+  baseURL: https://api.moonshot.cn/v1/fine_tuning
+  tags:
+  - Fine-Tuning
+  - Training
+  properties:
+  - type: Documentation
+    url: https://platform.moonshot.cn/docs
+  x-moved-from: >-
+    kimi-moonshot:fine-tuning (consolidated into moonshot-ai 2026-10-13, approved by Kin Lane)
+- aid: moonshot-ai:moonshot-ai-tokenizer-api
+  name: Kimi Tokenizer API
+  description: >-
+    Helper endpoint exposed by the Moonshot platform for counting tokens against a given model's tokenizer
+    prior to submission, useful for managing long-context budgets.
+  humanURL: https://platform.moonshot.cn/docs
+  baseURL: https://api.moonshot.cn/v1/tokenizers
+  tags:
+  - Tokenizer
+  - Utilities
+  properties:
+  - type: Documentation
+    url: https://platform.moonshot.cn/docs
+  x-moved-from: kimi-moonshot:tokenizer (consolidated into moonshot-ai 2026-10-13, approved by Kin Lane)
+- aid: moonshot-ai:moonshot-ai-kimi-assistant
+  name: Kimi Assistant (kimi.com)
+  description: >-
+    Consumer-facing AI assistant at kimi.com (also kimi.ai) powered by the Kimi models. Supports long-document
+    upload, web search grounding, and tool use through a chat UI.
+  humanURL: https://kimi.com/
+  baseURL: https://kimi.com/
+  tags:
+  - Assistant
+  - Consumer
+  properties:
+  - type: Website
+    url: https://kimi.com/
+  x-moved-from: kimi-moonshot:assistant (consolidated into moonshot-ai 2026-10-13, approved by Kin Lane)
+- aid: moonshot-ai:moonshot-ai-open-weights
+  name: Moonshot Open-Weights Releases
+  description: >-
+    Open-weight Kimi model releases (for example prior Kimi K1 / K2 checkpoints) published under the MoonshotAI
+    GitHub organization for research and self-hosted use.
+  humanURL: https://github.com/MoonshotAI
+  baseURL: https://github.com/MoonshotAI
+  tags:
+  - Open Weights
+  - Research
+  properties:
+  - type: Repository
+    url: https://github.com/MoonshotAI
+  x-moved-from: >-
+    kimi-moonshot:open-weights (consolidated into moonshot-ai 2026-10-13, approved by Kin Lane)
 - aid: moonshot-ai:moonshot-ai-chat-completions-api
   name: Moonshot AI Chat Completions API
   description: The Chat Completions API from Moonshot AI — 1 operation(s) for chat completions.
@@ -268,68 +341,3 @@ apis:
     url: json-schema/moonshot-ai-chat-completion-response-schema.json
   - type: JSONSchema
     url: json-schema/moonshot-ai-kimi-k25-chat-request-schema.json
-- aid: moonshot-ai:moonshot-ai-embeddings-api
-  name: Kimi Embeddings API
-  description: OpenAI-compatible embeddings endpoint that returns vector representations of input text for semantic search, clustering, and retrieval-augmented
-    generation workflows.
-  humanURL: https://platform.moonshot.cn/docs
-  baseURL: https://api.moonshot.cn/v1/embeddings
-  tags:
-  - Embeddings
-  - Vectors
-  properties:
-  - type: Documentation
-    url: https://platform.moonshot.cn/docs
-  x-moved-from: kimi-moonshot:embeddings (consolidated into moonshot-ai 2026-10-13, approved by Kin Lane)
-- aid: moonshot-ai:moonshot-ai-fine-tuning-api
-  name: Kimi Fine-Tuning API
-  description: Fine-tuning jobs endpoint for customizing Moonshot base models on customer-supplied training data. Mirrors the OpenAI fine-tuning
-    surface.
-  humanURL: https://platform.moonshot.cn/docs
-  baseURL: https://api.moonshot.cn/v1/fine_tuning
-  tags:
-  - Fine-Tuning
-  - Training
-  properties:
-  - type: Documentation
-    url: https://platform.moonshot.cn/docs
-  x-moved-from: kimi-moonshot:fine-tuning (consolidated into moonshot-ai 2026-10-13, approved by Kin Lane)
-- aid: moonshot-ai:moonshot-ai-tokenizer-api
-  name: Kimi Tokenizer API
-  description: Helper endpoint exposed by the Moonshot platform for counting tokens against a given model's tokenizer prior to submission, useful
-    for managing long-context budgets.
-  humanURL: https://platform.moonshot.cn/docs
-  baseURL: https://api.moonshot.cn/v1/tokenizers
-  tags:
-  - Tokenizer
-  - Utilities
-  properties:
-  - type: Documentation
-    url: https://platform.moonshot.cn/docs
-  x-moved-from: kimi-moonshot:tokenizer (consolidated into moonshot-ai 2026-10-13, approved by Kin Lane)
-- aid: moonshot-ai:moonshot-ai-kimi-assistant
-  name: Kimi Assistant (kimi.com)
-  description: Consumer-facing AI assistant at kimi.com (also kimi.ai) powered by the Kimi models. Supports long-document upload, web search grounding,
-    and tool use through a chat UI.
-  humanURL: https://kimi.com/
-  baseURL: https://kimi.com/
-  tags:
-  - Assistant
-  - Consumer
-  properties:
-  - type: Website
-    url: https://kimi.com/
-  x-moved-from: kimi-moonshot:assistant (consolidated into moonshot-ai 2026-10-13, approved by Kin Lane)
-- aid: moonshot-ai:moonshot-ai-open-weights
-  name: Moonshot Open-Weights Releases
-  description: Open-weight Kimi model releases (for example prior Kimi K1 / K2 checkpoints) published under the MoonshotAI GitHub organization
-    for research and self-hosted use.
-  humanURL: https://github.com/MoonshotAI
-  baseURL: https://github.com/MoonshotAI
-  tags:
-  - Open Weights
-  - Research
-  properties:
-  - type: Repository
-    url: https://github.com/MoonshotAI
-  x-moved-from: kimi-moonshot:open-weights (consolidated into moonshot-ai 2026-10-13, approved by Kin Lane)

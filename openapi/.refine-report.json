@@ -11,7 +11,9 @@
     "moonshot-ai-models-api-openapi.yml",
     "moonshot-ai-utilities-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
   "notes": [
@@ -23,12 +25,13 @@
     "moonshot-ai-openapi.json: declared missing tag: Files",
     "moonshot-ai-openapi.json: declared missing tag: Models",
     "moonshot-ai-openapi.json: declared missing tag: Utilities",
-    "apis.yml register: already-registered"
+    "superseded outputs removed: moonshot-ai-chat-completions-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 11 total)"
   ],
   "skipped": [
     "moonshot-ai-batch-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "moonshot-ai-billing-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "moonshot-ai-chat-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moonshot-ai-chat-completions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "moonshot-ai-files-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "moonshot-ai-models-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "moonshot-ai-utilities-api-openapi.yml: previously refined output, superseded by openapi/_original/"
