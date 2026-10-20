@@ -47,3 +47,101 @@
   relationship: system-coverage
   status: not-a-workflow
   arazzo: null
+- slug: moonshot-ai-winget-windows-package-manager
+  label: winget (Windows Package Manager)
+  partner_name: winget (Windows Package Manager)
+  category: official CLI (winget (Windows Package Manager))
+  type: register
+  channel: package-registry
+  evidence: https://github.com/microsoft/winget-pkgs/tree/master/manifests/m/MoonshotAI/KimiCLI
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: winget (Windows Package Manager) (public package index)
+    spec_file: null
+    packages:
+    - name: MoonshotAI.KimiCLI
+      kind: manifest
+      version: 1.52.0
+      released: '2026-09-22'
+      lapsed: false
+      page: https://github.com/microsoft/winget-pkgs/tree/master/manifests/m/MoonshotAI/KimiCLI
+      cli: 'winget: A new CLI agent that can help you with your software development tasks and termi'
+      repo_leg: domain:moonshot.ai
+      publisher_leg: artifact-github-org:moonshotai
+      matched_by: domain
+    current: true
+    signal_note: 'the provider''s own command-line tool on a package manager: distribution, not an integration;
+      lapsed = no release in 24 months or deprecated / disabled by the manager'
+    detected_by: sweep-official-clis.py
+    detected: '2026-10-20'
+  status: not-a-workflow
+  arazzo: null
+- slug: moonshot-ai-agent-skills-own-github-org
+  label: Agent Skills (own GitHub org)
+  partner_name: Agent Skills (own GitHub org)
+  category: Agent Skills package
+  type: register
+  channel: provider-built
+  evidence: https://github.com/MoonshotAI/kimi-cli
+  source: edge
+  relationship: compatible
+  contract_reference:
+    register: 'provider''s own GitHub org (GitHub REST API: repo + git tree holds SKILL.md)'
+    spec_file: null
+    standard: Agent Skills (agentskills.io)
+    role: agent-skills-repo
+    matched_org: moonshotai
+    matched_by: org-profile-domain:moonshot.ai
+    detected_by: sweep-agent-skills.py
+    detected: '2026-10-20'
+  status: not-a-workflow
+  arazzo: null
+- slug: moonshot-ai-claude-plugins-dev
+  label: claude-plugins.dev
+  partner_name: claude-plugins.dev
+  category: Agent Skills register
+  type: register
+  channel: standard-directory
+  evidence: https://claude-plugins.dev/skills/@moonshotai/kimi-cli
+  source: edge
+  relationship: compatible
+  contract_reference:
+    register: claude-plugins.dev (public sitemap / list)
+    spec_file: null
+    standard: Agent Skills (agentskills.io)
+    role: agent-skills-listing
+    matched_org: moonshotai
+    matched_by: org-profile-domain:moonshot.ai
+    sample_skills:
+    - kimi-cli-help
+    - release
+    - skill-creator
+    detected_by: sweep-agent-skills.py
+    detected: '2026-10-20'
+  status: not-a-workflow
+  arazzo: null
+- slug: moonshot-ai-skillsmp-skillsmp-com
+  label: SkillsMP (skillsmp.com)
+  partner_name: SkillsMP (skillsmp.com)
+  category: Agent Skills register
+  type: register
+  channel: standard-directory
+  evidence: https://skillsmp.com/creators/moonshotai/kimi-cli
+  source: edge
+  relationship: compatible
+  contract_reference:
+    register: SkillsMP (skillsmp.com) (public sitemap / list)
+    spec_file: null
+    standard: Agent Skills (agentskills.io)
+    role: agent-skills-listing
+    matched_org: moonshotai
+    matched_by: org-profile-domain:moonshot.ai
+    sample_skills:
+    - agents-skills-translate-docs
+    - plugins-official-kimi-datasource
+    - plugins-official-kimi-webbridge-skills-kimi-webbridge
+    detected_by: sweep-agent-skills.py
+    detected: '2026-10-20'
+  status: not-a-workflow
+  arazzo: null
