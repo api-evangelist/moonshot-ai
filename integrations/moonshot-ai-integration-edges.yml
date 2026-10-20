@@ -85,10 +85,55 @@ edges:
   matched_by: verified-token-table
   detected_by: sweep-model-routing.py
   first_seen: '2026-10-13'
+- partner_name: winget (Windows Package Manager)
+  partner: null
+  partner_match: null
+  type: register
+  direction: provider-built
+  category: official CLI (winget (Windows Package Manager))
+  evidence: https://github.com/microsoft/winget-pkgs/tree/master/manifests/m/MoonshotAI/KimiCLI
+  channel: package-registry
+  relationship: distribution-channel
+  contract_reference:
+    register: winget (Windows Package Manager) (public package index)
+    spec_file: null
+    packages:
+    - name: MoonshotAI.KimiCLI
+      kind: manifest
+      version: 1.52.0
+      released: '2026-09-22'
+      lapsed: false
+      page: https://github.com/microsoft/winget-pkgs/tree/master/manifests/m/MoonshotAI/KimiCLI
+      cli: 'winget: A new CLI agent that can help you with your software development tasks and termi'
+      repo_leg: domain:moonshot.ai
+      publisher_leg: artifact-github-org:moonshotai
+      matched_by: domain
+    current: true
+    signal_note: 'the provider''s own command-line tool on a package manager: distribution, not an integration;
+      lapsed = no release in 24 months or deprecated / disabled by the manager'
+    detected_by: sweep-official-clis.py
+    detected: '2026-10-20'
+  detected_by: sweep-official-clis.py
+  first_seen: '2026-10-20'
 generated: '2026-10-13'
 method: searched
 checked:
 - https://api.llmgateway.io/v1/models
+- https://cdn.winget.microsoft.com/cache
+- https://formulae.brew.sh/api/cask.json
+- https://formulae.brew.sh/api/formula.json
 - https://github.com/BerriAI/litellm/blob/main/model_prices_and_context_window.json
 - https://github.com/Portkey-AI/gateway/tree/main/src/providers
+- https://github.com/ScoopInstaller/Extras
+- https://github.com/ScoopInstaller/Main
 - https://openrouter.ai/api/v1/models
+- https://pypi.org/pypi
+- https://registry.npmjs.org
+source:
+- https://cdn.winget.microsoft.com/cache
+- https://formulae.brew.sh/api/cask.json
+- https://formulae.brew.sh/api/formula.json
+- https://github.com/ScoopInstaller/Extras
+- https://github.com/ScoopInstaller/Main
+- https://pypi.org/pypi
+- https://registry.npmjs.org
