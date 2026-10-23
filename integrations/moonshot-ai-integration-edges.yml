@@ -219,6 +219,66 @@ edges:
     detected: '2026-10-20'
   detected_by: sweep-agent-skills.py
   first_seen: '2026-10-20'
+- partner_name: Arch User Repository (AUR)
+  partner: null
+  partner_match: null
+  type: register
+  direction: provider-built
+  category: official CLI (Arch User Repository (AUR))
+  evidence: https://aur.archlinux.org/packages/kimi-cli
+  channel: package-registry
+  relationship: distribution-channel
+  contract_reference:
+    register: Arch User Repository (AUR) (public package index)
+    spec_file: null
+    packages:
+    - name: kimi-cli
+      kind: aur
+      version: 1.44.0-1
+      released: '2026-05-15'
+      released_field: AUR LastModified
+      out_of_date: true
+      lapsed: true
+      page: https://aur.archlinux.org/packages/kimi-cli
+      upstream: https://github.com/MoonshotAI/kimi-cli
+      cli: 'AUR description: Kimi Code CLI is your next CLI agent.'
+      repo_leg: github-org:moonshotai
+      publisher_leg: artifact-github-org:moonshotai
+      matched_by: github-org
+    - name: kimi-cli-bin
+      kind: aur
+      version: 1.52.0-1
+      released: '2026-10-01'
+      released_field: AUR LastModified
+      out_of_date: false
+      lapsed: false
+      page: https://aur.archlinux.org/packages/kimi-cli-bin
+      upstream: https://github.com/MoonshotAI/kimi-cli
+      cli: 'AUR description: Kimi Code CLI - AI coding agent (precompiled binary)'
+      repo_leg: github-org:moonshotai
+      publisher_leg: artifact-github-org:moonshotai
+      matched_by: github-org
+    - name: kimi-code-bin
+      kind: aur
+      version: 2.3.1-1
+      released: '2026-10-23'
+      released_field: AUR LastModified
+      out_of_date: false
+      lapsed: false
+      page: https://aur.archlinux.org/packages/kimi-code-bin
+      upstream: https://github.com/MoonshotAI/kimi-code
+      cli: 'AUR description: Kimi Code CLI - the starting point for next-gen agents (prebuilt binary)'
+      repo_leg: github-org:moonshotai
+      publisher_leg: artifact-github-org:moonshotai
+      matched_by: github-org
+    current: true
+    signal_note: 'the provider''s own command-line tool packaged for Arch Linux (community-maintained PKGBUILD whose
+      upstream and source artifact are the provider''s): distribution, not an integration; lapsed = flagged out-of-date
+      or not updated in 24 months'
+    detected_by: sweep-aur-vendor-cli-packages.py
+    detected: '2026-10-23'
+  detected_by: sweep-aur-vendor-cli-packages.py
+  first_seen: '2026-10-23'
 generated: '2026-10-13'
 method: searched
 checked:
@@ -239,6 +299,9 @@ checked:
 - https://officialskills.sh/sitemap.xml
 - https://skillsmp.com/sitemap.xml
 - https://www.skills.sh/sitemap.xml
+- https://aur.archlinux.org/cgit/aur.git/tree/.SRCINFO
+- https://aur.archlinux.org/packages-meta-ext-v1.json.gz
+- https://aur.archlinux.org/rpc/v5/info
 source:
 - https://formulae.brew.sh/api/formula.json
 - https://formulae.brew.sh/api/cask.json
